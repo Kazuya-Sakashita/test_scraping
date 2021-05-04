@@ -11,4 +11,5 @@ $ruby selenium.rb
 https://www.seiburailway.jp/
 を取得して、
 seleniumTest.txt
-に保存
+に保存される
+その際にchromeが立ち上がり１０秒後に終了する
