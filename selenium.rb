@@ -3,7 +3,10 @@ require "selenium-webdriver"
  
 # chromedriverを起動しています
 driver = Selenium::WebDriver.for :chrome
- 
+
+#要素が見つからない場合最大で10秒間待つよう指定
+driver.manage.timeouts.implicit_wait = 10
+
 # Googleを開きます
 driver.get "https://www.seiburailway.jp/railwayinfo/index.html"
 
@@ -19,8 +22,8 @@ else
     puts "Not found"
 end
 
-# 10秒間待機します
-sleep 10
+# 10秒間待機します 要素検索時の10秒待ちに変更
+# sleep 10
  
 # ブラウザを閉じます
 driver.quit
