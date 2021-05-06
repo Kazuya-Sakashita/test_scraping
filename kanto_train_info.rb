@@ -8,25 +8,23 @@ driver = Selenium::WebDriver.for :chrome
 driver.manage.timeouts.implicit_wait = 10
 
 # Googleを開きます
-driver.get "https://www.seiburailway.jp/railwayinfo/index.html"
+driver.get "https://traininfo.jreast.co.jp/train_info/kanto.aspx"
 
 # 抽出する部分　手っ取り早く取得するために場所を指定してテキストを抽出しseleniumTest.txtに書き出し
-if  coment = driver.find_element(:xpath,"/html/body/div[1]/div/div/div/div/section[2]/div/div/div/div/div[5]/div/div/p/a").text
-    time = driver.find_element(:xpath,"/html/body/div[1]/div/div/div/div/section[2]/div/div/div/div/div[1]/div/div/p/time").text
-  elements = {coment: coment, time: time}
-  file = File.open('seleniumTest.txt', 'w')
+ 
+#secion[1]の数字を変化させる
+  
+  line = driver.find_element(:xpath,"/html/body/div/main/section[3]/section/section[1]/div/table/tbody/tr[1]/th/div/p[1]/span[2]").text
+  coment = driver.find_element(:xpath,"/html/body/div/main/section[3]/section/section[1]/div/table/tbody/tr[1]/td/a/div/p[2]").text
+  elements = {line: line, coment: coment}
+  file = File.open('kanto_train_info.txt', 'w')
   file.write(elements)
   file.close
   
-else
-    puts "Not found"
-end
 
-<<<<<<< HEAD
-=======
+
 # 10秒間待機します 要素検索時の10秒待ちに変更
 # sleep 10
  
->>>>>>> 0c024478d124c4b72e4add0a1d418e39ef8a32ca
 # ブラウザを閉じます
 driver.quit
