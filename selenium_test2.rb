@@ -17,6 +17,9 @@ else
     puts "Not found"
 end
 
+# 10秒間待機します
+sleep 10
+ 
 # ブラウザを閉じます
 driver.quit
 
