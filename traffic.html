@@ -1,1623 +1,629 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="title" content="運行情報サイト更新状況 - 鉄道コム">
-<meta name="description" content="全国の列車運行情報サイトの掲載状況を一覧で表示。5～20分間隔で更新中。">
-<meta name="viewport" content="width=device-width">
-<meta name="referrer" content="unsafe-url">
-<link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-<link rel="dns-prefetch" href="//images.tetsudo.com">
-<link rel="dns-prefetch" href="//imp.aiasahi.jp">
-<link rel="canonical" href="https://www.tetsudo.com/traffic/">
-<link rel="index" type="text/html" href="/">
-<link rel="help" type="text/html" href="/help/">
-<link rel="alternate" type="application/atom+xml" title="運行情報サイト更新状況（全国版）" href="http://api.tetsudo.com/traffic/atom.xml">
-<link rel="stylesheet" media="all" href="/styles/normalize.css">
-<link rel="stylesheet" media="all" href="/styles/common.css?20210322">
-<link rel="stylesheet" media="print, screen and (min-width: 751px)" href="/styles/common.pc.css?20210322">
-<link rel="stylesheet" media="screen and (max-width: 750px)" href="/styles/common.mini.css?20210322">
-<link rel="stylesheet" media="all" href="/styles/traffic/index.css?20210322_4">
-<link rel="stylesheet" media="screen and (max-width: 750px)" href="/styles/traffic/index.mini.css?20210322_3">
-
-<link rel="stylesheet" media="all" href="/styles/jquery/magnific-popup.css?20180219">
-<script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js"></script><script>FontAwesomeConfig = { searchPseudoElements: true };</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://img.ak.impact-ad.jp/util/ipsx_webtag_20160907.js"></script>
-<script src="/scripts/jquery/magnific-popup-min.js"></script>
-<script src="/scripts/common.js?20210225"></script>
-<script src="https://www.googleoptimize.com/optimize.js?id=OPT-T52X3C6"></script>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-11521464-1', 'auto');
+var TLDataContext = {
+  ual : {
+    pageview : {
+      opttype         : 'pc',
+      content_id      : '',
+      id_type         : '',
+      nopv            : 'false',
+      mtestid         : '',
+      ss_join_id      : '',
+      ss_join_id_type : '',
+      hierarchy_id    : '2079416302'
+    }
+  }
+};
 </script>
-<script src="/scripts/traffic.js?20180227"></script>
-<script>
-var mobile_list_tooltip = 0;
-</script>
-<script src="//anymind360.com/js/2078/ats.js"></script>
-<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
-<script>
-  var slotBasePath = '/83555300/asahi_interactive/tetsudo_com/';
-  var slot = {PC:{}, SP:{}};
-  slot['PC']['pc_list_billboard'] = [[1, 1], [970, 250], 'fluid'];
-  slot['SP']['sp_list_billboard'] = [[1, 1], [320, 180], [320, 100], 'fluid'];
-  slot['PC']['pc_list_right_1st'] = [[1, 1], [336, 280], [300, 250], [300, 600], 'fluid'];
-  slot['SP']['sp_list_footer_1st'] = [[1, 1], [336, 280], [300, 250], 'fluid'];
-  slot['PC']['pc_list_right_3rd'] = [[1, 1], [336, 280], [300, 250], [300, 600], 'fluid'];
-  slot['SP']['sp_list_footer_3rd'] = [[1, 1], [336, 280], [300, 250], 'fluid'];
-  slot['PC']['pc_list_footer'] = [[1, 1], [728, 90], 'fluid'];
-  slot['SP']['sp_list_footer_4th'] = [[1, 1], [336, 280], [300, 250], 'fluid'];
-  slot['PC']['pc_list_infeed'] = [[1, 1], 'fluid'];
-  slot['SP']['sp_list_infeed'] = [[1, 1], 'fluid'];
-  slot['PC']['pc_list_right_2nd'] = [[1, 1], [336, 280], [300, 250], [300, 600], 'fluid'];
-  slot['SP']['sp_list_footer_2nd'] = [[1, 1], [336, 280], [300, 250], 'fluid'];
-  
-  var device = /ip(hone|od)|android.*(mobile|mini)/i.test(navigator.userAgent) ||
-    /Opera Mobi|Mobile.+Firefox|^HTC|Fennec|IEMobile|BlackBerry|BB10.*Mobile|GT-.*Build\/GINGERBREAD|SymbianOS.*AppleWebKit/.test(navigator.userAgent)
-    ? 'SP' : 'PC';
-  
-      window.googletag = window.googletag || {cmd: []};
-      var _AdSlots = [];
-      googletag.cmd.push(function() {
-          var i = 0;
-          for( var unit in slot[device] ) {
-              _AdSlots[i] = googletag.defineSlot(slotBasePath+unit, slot[device][unit], unit).addService(googletag.pubads());
-              i++;
-          }
-          googletag.pubads().enableSingleRequest();
-          googletag.pubads().collapseEmptyDivs(true,true);
-          googletag.enableServices();
-      });
-
-</script><script>
-  max_mobile_width = 750; // setting
-  window_width = $(window).width();
-
+<script type="text/javascript">
+  (function () {
+    var tagjs = document.createElement("script");
+    var s = document.getElementsByTagName("script")[0];
+    tagjs.async = true;
+    tagjs.src = "//s.yjtag.jp/tag.js#site=3SKeVX4";
+    s.parentNode.insertBefore(tagjs, s);
+  }());
 </script>
 
-<title>運行情報サイト更新状況 - 鉄道コム</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>西武新宿線の運行情報 - Yahoo!路線情報</title>
+<meta name="description" content="Yahoo!路線情報：西武新宿線の運行情報。全国の路線の運行状況・遅延情報や、事故・運休・工事情報などをご提供しています。">
+<meta name="keywords" content="鉄道,航空路線,乗り換え案内,路線,運行情報,運行状況,運休,事故,遅延,遅延情報,西武新宿線">
+
+<link rel="stylesheet" href="https://s.yimg.jp/images/transit/pc/v2/css/yjTmplCommon-min.css" type="text/css" media="all">
+<link rel="stylesheet" href="https://s.yimg.jp/images/transit/pc/v2/css/common-1.0.0.css?v=20210521" type="text/css" media="all">
+<link rel="stylesheet" href="https://s.yimg.jp/images/transit/pc/v2/css/transInfo-1.0.0.css" type="text/css" media="all">
+<!--[if lt IE 6]>
+<link rel="stylesheet" href="https://s.yimg.jp/yui/jp/tmpl/1.1.0/yjTmplIE5-min.css" type="text/css" media="all">
+<![endif]-->
+<link rel="canonical" href="https://transit.yahoo.co.jp/traininfo/detail/86/0/">
+    <link rel="alternate" href="android-app://jp.co.yahoo.android.apps.transit/ytransit/diainfo?railcode=86&range=0" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:title" content="西武新宿線の運行情報 - Yahoo!路線情報" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://transit.yahoo.co.jp/traininfo/detail/86/0/" />
+<meta property="og:site_name" content="Yahoo!路線情報" />
+<meta property="og:description" content="現在､事故･遅延に関する情報はありません。（6月1日 07時02分時点の情報です。最新情報はYahoo!路線情報で）" />
+<meta property="og:image" content="https://s.yimg.jp/images/transit/icon/ogp_transit1200.png" />
+<meta property="fb:app_id" content="384116968294566" />
+<!-- basic-MHCSS -->
+<!-- mhcss -->
+<link href="https://s.yimg.jp/yui/jp/mh/pc/1.5.6/css/std.css" rel="stylesheet" type="text/css" media="all">
+<!-- /mhcss --><script>
+(function() {
+  var domain = "transit.yahoo.co.jp";
+  var spaceid = "2079416302";
+  var property = "jp";
+  var url = "https://pvtag.yahoo.co.jp/t?f=" + spaceid + "&p=" + property + "&domain=" + domain + "&js=1&rnd=" + new Date().getTime();
+  document.write("<sc" + "ript src=\""  + url + "\"></sc" + "ript>");
+})();
+</script>
 </head>
+<body class="yj100per-2">
+<noscript>
+  <iframe src="//b.yjtag.jp/iframe?c=3SKeVX4" width="1" height="1" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+</noscript>
 
-<body onload="window.IPSX.onloadDisplayAds;">
+<noscript>
+<iframe src="https://pvtag.yahoo.co.jp/t?f=2079416302&p=jp&domain=transit.yahoo.co.jp&js=0" height=1 width=1 marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling="no"></iframe>
+</noscript>
+<!--wrapper start-->
 
-<!--[if lte IE 8]><div id="site-revamped">ご利用のブラウザは対応していません（サポートは終了しました）</div><![endif]-->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.4";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<div id="wrapper">
+<!--header start-->
+<div id="header">
+<span class="yj-guid"><a name="pagetop" id="pagetop"></a><img src="https://s.yimg.jp/images/clear.gif" width="1" height="1" alt="このページの先頭です"></span>
+<span class="yj-skip"><a href="#contents-start"><img src="https://s.yimg.jp/images/clear.gif" alt="このページの本文へ" width="1" height="1" ></a></span>
 
-<!--==========Common Header==========-->
-
-<header>
-
-	<div class="common-header">
-
-		<div class="global-header">
-
-			<div class="global-header-logotype">
-				<p><a href="/" title="鉄道コム"><img src="//images.tetsudo.com/logotype/tetsudocom_logo_400_fafafa.png" alt="鉄道コム" class="logotype-common-header"></a></p>
-			</div>
-			<div class="global-header-thanks-20th">
-			</div>
-			<div class="global-header-search-form">
-				<form action="/search/query/" method="get" class="search" role="search">
-					<p>
-						<input type="search" name="keyword" value="" class="search-text" id="common-header-search-input" autocomplete="off" placeholder="キーワードを入力して検索する">
-						<button type="submit" class="search-submit"></button>
-					</p>
-				</form>
-			</div>
-
-		</div>
-
-	</div>
-
-		<nav>
-
-			<div class="common-navi clearfix">
-
-				<input type="checkbox" class="common-mobile-menu-check" id="common-mobile-input-checked">
-				<label class="common-mobile-menu-btn" for="common-mobile-input-checked"><!--<i class="fas fa-bars" data-fa-transform="grow-15"></i>--></label>
-
-				<ul class="items clearfix">
-					<li class="common-navi"><a href="/" title="Tetsudo.com（鉄道コム）" class="common-navi"><span class="three-digits">トップ</span></a></li>
-					<li class="common-navi"><a href="/event/" title="鉄道イベント情報" class="common-navi"><span>イベント情報</span></a></li>
-					<li class="common-navi"><a href="/news/" title="鉄道未来ニュース" class="common-navi"><span>未来ニュース</span></a></li>
-					<li class="common-navi"><a href="/report/" title="鉄道リポート" class="common-navi"><span class="four-digits">リポート</span></a></li>
-					<li class="common-navi"><a href="/topics/" title="鉄道車両トピックス" class="common-navi"><span>車両トピック</span></a></li>
-					<li class="common-navi current"><span class="four-digits">運行情報</span></li>
-					<li class="common-navi"><a href="/site/" title="鉄道公式リリース" class="common-navi"><span>公式リリース</span></a></li>
-					<li class="common-navi"><a href="/newspaper/" title="新聞･放送ニュース" class="common-navi"><span>新聞放送速報</span></a></li>
-					<li class="common-navi"><a href="/microblog/" title="鉄道つぶやき" class="common-navi"><span class="four-digits">つぶやき</span></a></li>
-					<li class="common-navi"><a href="/blog/" title="鉄道ブログ" class="common-navi"><span class="three-digits">ブログ</span></a></li>
-					<li class="common-navi"><a href="/movie/" title="鉄道動画" class="common-navi"><span class="two-digits">動画</span></a></li>
-					<li class="common-navi"><a href="/bbs/" title="鉄道掲示板" class="common-navi"><span class="three-digits">掲示板</span></a></li>
-					<li class="common-navi"><a href="/word/" title="ひとこと" class="common-navi"><span class="four-digits">ひとこと</span></a></li>
-					<li class="common-navi"><a href="/chain/" title="駅つなゲー" class="common-navi"><span class="five-digits">駅つなゲー</span></a></li>
-					<li class="common-navi"><a href="/category/" title="カテゴリ" class="common-navi"><span class="four-digits">カテゴリ</span></a></li>
-					<li class="common-navi"><a href="/search/" title="検索" class="common-navi"><span class="two-digits">検索</span></a></li>
-					<li class="common-navi"><a href="/kakenuke/" title="駆け抜けた名列車" class="common-navi"><span>往年JR列車</span></a></li>
-					<li class="common-navi"><a href="/help/" title="ヘルプ" class="common-navi"><span class="three-digits">ヘルプ</span></a></li>
-					<li class="common-navi"><a href="/special/20th/" title="特別企画" class="common-navi"><span class="four-digits">特別企画</span></a></li>
-
-				</ul>
-
-				<ul class="paid-items clearfix">
-					<li class="common-navi"><a href="/help/ajax/paidinfo_mb.html?done=https%3A%2F%2Fwww.tetsudo.com%2Ftraffic%2F" rel="nofollow" title="ヘルプ" class="common-navi simple-ajax-popup-align-top"><i class="fa fa-key" aria-hidden="true">&nbsp;</i>有料サービスのご案内</a></li>
-					<li class="common-navi certificate"><a href="/help/ajax/paidauth_mb.html?done=https%3A%2F%2Fwww.tetsudo.com%2Ftraffic%2F" rel="nofollow" title="ヘルプ" class="common-navi simple-ajax-popup-align-top"><i class="fa fa-unlock-alt" aria-hidden="true">&nbsp;</i>有料会員の認証を行う</a></li>
-				</ul>
-			</div>
-
-		</nav>
-
-
-</header>
-	<div class="ads-super-banner-a">
-        <div id="pc_list_billboard"></div>
-        <!-- /83555300/asahi_interactive/tetsudo_com/pc_list_billboard -->
-        <script>
-            googletag.cmd.push(function() { googletag.display('pc_list_billboard'); });
-        </script>
+<!-- basic-MH-logout -->
+<!-- mhd -->
+<div id="msthd">
+  <div>
+    <div id="msthdtp">
+      <div id="mhd_uhd_pc"></div>
+      <div id="msthdsb">
+        <div class="msthdLink">
+          <ul>
+            <li class="msthdLinkYtop"><a data-redirectadclick href="https://www.yahoo.co.jp/" data-ylk="slk:h_ytop;pos:0" id="msthdYtop">Yahoo! JAPAN</a></li>
+            <!-- mhhl -->
+            <li class="msthdLinkHelp"><a data-redirectadclick href="https://www.yahoo-help.jp/app/home/service/transit/" data-ylk="slk:h_hlp;pos:0" id="msthdHelp">ヘルプ</a></li>
+            <!-- /mhhl -->
+          </ul>
+        </div>
+        <div id="msthdsrch">
+          <form data-redirectadclick action="https://search.yahoo.co.jp/search" name="p">
+            <p id="msthdsrchBox">
+              <label id="msthdslb" for="msthdsbox" title="キーワード：" class="offLeft">キーワード：</label>
+              <input id="msthdsbox" type="text" name="p" value="" placeholder="ウェブ検索">
+              <button id="msthdsbt" type="submit" title="検索">検索</button>
+              <input type=hidden name="ei" value="UTF-8" id="msthdei">
+              <input type=hidden name="fr" value="ush">
+            </p>
+          </form>
+        </div>
+      </div>
     </div>
-
-<!--==========Common Container==========-->
-
-<div class="common-container">
-
-
-<!--==========Common Left Division==========-->
-
-	<div class="common-left-div">
-
-	<main>
-
-		<div class="main-content-header">
-			<h1>運行情報サイト更新状況</h1>
-		<p>2021年5月6日（木）19時6分現在</p>
-		</div>
-	<div class="ads-sp-header">
-        <div id="sp_list_billboard"></div>
-        <!-- /83555300/asahi_interactive/tetsudo_com/sp_list_billboard -->
-        <script>
-            googletag.cmd.push(function() { googletag.display('sp_list_billboard'); });
-        </script>
+    <!-- mhlg -->
+    <div class="logo">
+      <a data-redirectadclick href="https://transit.yahoo.co.jp/" data-ylk="slk:h_srvtop;pos:0" id="msthdLogo">
+        <img src="https://s.yimg.jp/c/logo/f/2.0/transit_r_34_2x.png" alt="Yahoo!路線情報" width="215" height="34">
+      </a>
     </div>
-
-		<p class="main-text">鉄道事業者の各運行情報Webサイトの更新状況を表示しています。運行情報の詳しい内容は、このページからリンクしている各社のサイトをご参照ください。なお、災害などにより長期間不通になっている路線は、「<a href="./map/" class="general-anchor" title="鉄道長期不通区間マップ">鉄道長期不通区間マップ</a>」で全国の状況をご覧になれます。</p>
-
-		<div class="main-box traffic-category-listbox">
-
-			<h2>詳細の鉄道遅延情報を見る</h2>
-
-
-				<ul class="second-layer">
-					<li><a href="/traffic/category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道運行情報" class="general-anchor">新幹線</a></li>
-
-					<li><a href="/traffic/category/%E5%8C%97%E6%B5%B7%E9%81%93%E3%82%A8%E3%83%AA%E3%82%A2/" title="北海道エリアの鉄道運行情報" class="general-anchor">北海道</a></li>
-
-					<li><a href="/traffic/category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道運行情報" class="general-anchor">東北</a></li>
-
-					<li><a href="/traffic/category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道運行情報" class="general-anchor">関東</a></li>
-
-					<li><a href="/traffic/category/%E4%BF%A1%E8%B6%8A%E3%82%A8%E3%83%AA%E3%82%A2/" title="信越エリアの鉄道運行情報" class="general-anchor">信越</a></li>
-
-					<li><a href="/traffic/category/%E5%8C%97%E9%99%B8%E3%82%A8%E3%83%AA%E3%82%A2/" title="北陸エリアの鉄道運行情報" class="general-anchor">北陸</a></li>
-
-					<li><a href="/traffic/category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道運行情報" class="general-anchor">東海</a></li>
-
-					<li><a href="/traffic/category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道運行情報" class="general-anchor">近畿</a></li>
-
-					<li><a href="/traffic/category/%E4%B8%AD%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="中国エリアの鉄道運行情報" class="general-anchor">中国</a></li>
-
-					<li><a href="/traffic/category/%E5%9B%9B%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="四国エリアの鉄道運行情報" class="general-anchor">四国</a></li>
-
-					<li><a href="/traffic/category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/" title="九州エリアの鉄道運行情報" class="general-anchor">九州</a></li>
-
-				</ul>
-			</div>
-        
-		<div class="traffic-box">
-
-			<div class="trafficinfo-box main-box">
-				<div class="main-box-header">
-					<h2>新幹線</h2>
-					<p><span class="link-outernal-info">外部サイトあり</span></p>
-				</div>
-
-				<table class="main-table">
-
-					<caption class="no-display">新幹線の運行情報一覧</caption>
-					<thead class="no-display">
-						<tr>
-							<th class="company">会社・エリア名</th>
-							<th class="pictgram">更新状況</th>
-							<th class="lines">路線名</th>
-							<th class="certificate">遅延証明書</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr id="Traffic-33" class="irregular">
-							<th class="company"><a href="https://traininfo.jr-central.co.jp/shinkansen/pc/ja/index.html" title="東海道新幹線の運行情報ページ" class="general-anchor">東海道新幹線</a><a href="https://twitter.com/JRC_Shinkan_jp" title="東海道新幹線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://traininfo.jr-central.co.jp/shinkansen/pc/ja/index.html" data-sp-href="https://traininfo.jr-central.co.jp/shinkansen/sp/ja/index.html" title="お知らせが掲載されています（19時05分現在）" class="main-table-button main-table-button-info"><i class="fas fa-bell"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://traininfo.jr-central.co.jp/shinkansen/">東海道新幹線</a></td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,48,48,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">26%</span><span class="message">きょうの東海道新幹線の遅延確率：26％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-34" class="">
-							<th class="company"><a href="http://trafficinfo.westjr.co.jp/sanyo.html" title="山陽新幹線の運行情報ページ" class="general-anchor">山陽新幹線</a><a href="https://twitter.com/jrwest_Shinkan" title="山陽新幹線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://trafficinfo.westjr.co.jp/sanyo.html" data-sp-href="http://trafficinfo.westjr.co.jp/sp/sanyo.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,70,70,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">15%</span><span class="message">きょうの山陽新幹線の遅延確率：15％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-35" class="">
-							<th class="company"><a href="https://www.jrkyushu.co.jp/trains/info/shin.html" title="九州新幹線の運行情報ページ" class="general-anchor">九州新幹線</a></th>
-							<td class="pictgram"><a href="https://www.jrkyushu.co.jp/trains/info/shin.html" data-sp-href="https://www.jrkyushu.co.jp/trains/info/shin.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,82,82,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">9%</span><span class="message">きょうの九州新幹線の遅延確率：9％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-36" class="">
-							<th class="company"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="東北新幹線の運行情報ページ" class="general-anchor">東北新幹線</a><a href="https://twitter.com/JRE_Super_Exp" title="東北新幹線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" data-sp-href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,92,92,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">4%</span><span class="message">きょうの東北新幹線の遅延確率：4％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-37" class="">
-							<th class="company"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="山形新幹線の運行情報ページ" class="general-anchor">山形新幹線</a><a href="https://twitter.com/JRE_Super_Exp" title="山形新幹線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" data-sp-href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,70,70,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">15%</span><span class="message">きょうの山形新幹線の遅延確率：15％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-38" class="">
-							<th class="company"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="秋田新幹線の運行情報ページ" class="general-anchor">秋田新幹線</a><a href="https://twitter.com/JRE_Super_Exp" title="秋田新幹線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" data-sp-href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,86,86,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">7%</span><span class="message">きょうの秋田新幹線の遅延確率：7％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-860" class="">
-							<th class="company"><a href="https://www3.jrhokkaido.co.jp/webunkou/index.asp?a=6" title="北海道新幹線の運行情報ページ" class="general-anchor">北海道新幹線</a><a href="https://twitter.com/jrhokkaido_info" title="北海道新幹線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www3.jrhokkaido.co.jp/webunkou/index.asp?a=6" data-sp-href="https://www3.jrhokkaido.co.jp/webunkou/index.asp?a=6" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの北海道新幹線の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-39" class="">
-							<th class="company"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="上越新幹線の運行情報ページ" class="general-anchor">上越新幹線</a><a href="https://twitter.com/JRE_Super_Exp" title="上越新幹線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" data-sp-href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの上越新幹線の遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-40" class="">
-							<th class="company"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="北陸新幹線の運行情報ページ" class="general-anchor">北陸新幹線</a><a href="https://twitter.com/JRE_Super_Exp" title="北陸新幹線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" data-sp-href="https://traininfo.jreast.co.jp/train_info/shinkansen.aspx" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%96%B0%E5%B9%B9%E7%B7%9A/" title="新幹線の鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,32,32,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">34%</span><span class="message">きょうの北陸新幹線の遅延確率：34％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="trafficinfo-box main-box">
-				<div class="main-box-header">
-					<h2>関東エリア</h2>
-					<p><span class="link-outernal-info">外部サイトあり</span></p>
-				</div>
-
-				<table class="main-table">
-
-					<caption class="no-display">関東エリアの運行情報一覧</caption>
-					<thead class="no-display">
-						<tr>
-							<th class="company">会社・エリア名</th>
-							<th class="pictgram">更新状況</th>
-							<th class="lines">路線名</th>
-							<th class="certificate">遅延証明書</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr id="Traffic-5" class="irregular">
-							<th class="company"><a href="https://traininfo.jreast.co.jp/train_info/kanto.aspx" title="JR東日本（関東地区）の運行情報ページ" class="general-anchor">JR東日本（関東地区）</a></th>
-							<td class="pictgram"><a href="https://traininfo.jreast.co.jp/train_info/kanto.aspx" data-sp-href="https://traininfo.jreast.co.jp/train_info/kanto.aspx" title="遅延などの情報が掲載されています（19時06分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://traininfo.jreast.co.jp/train_info/kanto.aspx">横須賀線･総武快速線･小海線･京浜東北線･青梅線･京葉線･中央線快速電車･常磐線快速電車･山手線･中央･総武各駅停車</a></td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">58%</span><span class="message">きょうのJR東日本（関東地区）の遅延確率：58％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-11" class="">
-							<th class="company"><a href="https://www.tokyometro.jp/" title="東京メトロの運行情報ページ" class="general-anchor">東京メトロ</a></th>
-							<td class="pictgram"><a href="https://www.tokyometro.jp/" data-sp-href="https://www.tokyometro.jp/index.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,52,52,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">24%</span><span class="message">きょうの東京メトロの遅延確率：24％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-12" class="">
-							<th class="company"><a href="http://www.kotsu.metro.tokyo.jp/subway/schedule/index.html" title="都営地下鉄の運行情報ページ" class="general-anchor">都営地下鉄</a><a href="https://twitter.com/toeikotsu" title="都営地下鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.kotsu.metro.tokyo.jp/subway/schedule/index.html" data-sp-href="http://www.kotsu.metro.tokyo.jp/subway/schedule/index.html" title="遅延などの情報は掲載されていません（19時04分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,58,58,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">21%</span><span class="message">きょうの都営地下鉄の遅延確率：21％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-13" class="irregular">
-							<th class="company"><a href="https://t-info.tobu-ticket.jp/" title="東武鉄道の運行情報ページ" class="general-anchor">東武鉄道</a><a href="https://twitter.com/TobuRailway_JP" title="東武鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://t-info.tobu-ticket.jp/" data-sp-href="https://t-info.tobu-ticket.jp/" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://t-info.tobu-ticket.jp/">東武スカイツリーライン</a></td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,74,74,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">13%</span><span class="message">きょうの東武鉄道の遅延確率：13％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-14" class="">
-							<th class="company"><a href="https://www.seiburailway.jp/railwayinfo/index.html" title="西武鉄道の運行情報ページ" class="general-anchor">西武鉄道</a><a href="https://twitter.com/seiburailway" title="西武鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.seiburailway.jp/railwayinfo/index.html" data-sp-href="https://www.seiburailway.jp/railwayinfo/index.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,54,54,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">23%</span><span class="message">きょうの西武鉄道の遅延確率：23％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-17" class="">
-							<th class="company"><a href="https://www.keisei.co.jp/traininfo/index.php" title="京成電鉄の運行情報ページ" class="general-anchor">京成電鉄</a><a href="https://twitter.com/keiseirailway" title="京成電鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.keisei.co.jp/traininfo/index.php" data-sp-href="https://www.keisei.co.jp/traininfo/index.php" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,50,50,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">25%</span><span class="message">きょうの京成電鉄の遅延確率：25％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-18" class="">
-							<th class="company"><a href="http://www.keio.co.jp/unkou/unkou_pc.html" title="京王電鉄の運行情報ページ" class="general-anchor">京王電鉄</a><a href="https://twitter.com/keiodentetsu" title="京王電鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.keio.co.jp/unkou/unkou_pc.html" data-sp-href="http://www.keio.co.jp/unkou/unkou_pc.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,76,76,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">12%</span><span class="message">きょうの京王電鉄の遅延確率：12％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-19" class="">
-							<th class="company"><a href="http://www.odakyu.jp/cgi-bin/user/emg/emergency_bbs.pl" title="小田急電鉄の運行情報ページ" class="general-anchor">小田急電鉄</a><a href="https://twitter.com/odakyuline_info" title="小田急電鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.odakyu.jp/cgi-bin/user/emg/emergency_bbs.pl" data-sp-href="http://www.odakyu.jp/cgi-bin/user/emg/emergency_bbs.pl" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,68,68,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">16%</span><span class="message">きょうの小田急電鉄の遅延確率：16％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-15" class="">
-							<th class="company"><a href="http://www.tokyu.co.jp/" title="東急電鉄の運行情報ページ" class="general-anchor">東急電鉄</a><a href="https://twitter.com/tokyu_official " title="東急電鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.tokyu.co.jp/" data-sp-href="http://www.tokyu.co.jp/unten/unten.php" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,72,72,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">14%</span><span class="message">きょうの東急電鉄の遅延確率：14％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-16" class="">
-							<th class="company"><a href="http://unkou.keikyu.co.jp/" title="京急電鉄の運行情報ページ" class="general-anchor">京急電鉄</a><a href="https://twitter.com/keikyu_official" title="京急電鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://unkou.keikyu.co.jp/" data-sp-href="http://unkou.keikyu.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,66,66,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">17%</span><span class="message">きょうの京急電鉄の遅延確率：17％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-20" class="">
-							<th class="company"><a href="https://www.sotetsu.co.jp/train/status/" title="相模鉄道の運行情報ページ" class="general-anchor">相模鉄道</a><a href="https://twitter.com/sotetsu_pr" title="相模鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.sotetsu.co.jp/train/status/" data-sp-href="https://www.sotetsu.co.jp/train/status/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,54,54,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">23%</span><span class="message">きょうの相模鉄道の遅延確率：23％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-65" class="">
-							<th class="company"><a href="http://www.shinkeisei.co.jp/train/rail_info/" title="新京成電鉄の運行情報ページ" class="general-anchor">新京成電鉄</a></th>
-							<td class="pictgram"><a href="http://www.shinkeisei.co.jp/train/rail_info/" data-sp-href="http://www.shinkeisei.co.jp/train/rail_info/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,92,92,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">4%</span><span class="message">きょうの新京成電鉄の遅延確率：4％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-59" class="">
-							<th class="company"><a href="https://www.city.yokohama.lg.jp/kotsu/" title="横浜市営地下鉄の運行情報ページ" class="general-anchor">横浜市営地下鉄</a><a href="https://twitter.com/yokohama_koutuu" title="横浜市営地下鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.city.yokohama.lg.jp/kotsu/" data-sp-href="https://www.city.yokohama.lg.jp/kotsu/" title="遅延などの情報は掲載されていません（0時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,76,76,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">12%</span><span class="message">きょうの横浜市営地下鉄の遅延確率：12％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-52" class="">
-							<th class="company"><a href="http://service.twr.co.jp/service_info/information.html" title="りんかい線の運行情報ページ" class="general-anchor">りんかい線</a><a href="https://twitter.com/twr_official" title="りんかい線の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://service.twr.co.jp/service_info/information.html" data-sp-href="http://service.twr.co.jp/service_info/information.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,88,88,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">6%</span><span class="message">きょうのりんかい線の遅延確率：6％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-51" class="">
-							<th class="company"><a href="https://www.mir.co.jp/info/" title="つくばエクスプレスの運行情報ページ" class="general-anchor">つくばエクスプレス</a><a href="https://twitter.com/TX_information" title="つくばエクスプレスの公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.mir.co.jp/info/" data-sp-href="https://www.mir.co.jp/info/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,90,90,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">5%</span><span class="message">きょうのつくばエクスプレスの遅延確率：5％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-752" class="">
-							<th class="company"><a href="http://www.kantetsu.co.jp/unkouinfo/details.cgi" title="関東鉄道の運行情報ページ" class="general-anchor">関東鉄道</a></th>
-							<td class="pictgram"><a href="http://www.kantetsu.co.jp/unkouinfo/details.cgi" data-sp-href="http://www.kantetsu.co.jp/unkouinfo/details.cgi" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,76,76,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">12%</span><span class="message">きょうの関東鉄道の遅延確率：12％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-50" class="">
-							<th class="company"><a href="http://www.yurikamome.co.jp/info/operation/" title="ゆりかもめの運行情報ページ" class="general-anchor">ゆりかもめ</a><a href="https://twitter.com/yurikamome_info" title="ゆりかもめの公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.yurikamome.co.jp/info/operation/" data-sp-href="http://www.yurikamome.co.jp/info/operation/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,80,80,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">10%</span><span class="message">きょうのゆりかもめの遅延確率：10％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-49" class="irregular">
-							<th class="company"><a href="http://www.tokyo-monorail.co.jp/guidance/" title="東京モノレールの運行情報ページ" class="general-anchor">東京モノレール</a></th>
-							<td class="pictgram"><a href="http://www.tokyo-monorail.co.jp/guidance/" data-sp-href="http://www.tokyo-monorail.co.jp/guidance/" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://www.tokyo-monorail.co.jp/guidance/">東京モノレール</a></td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの東京モノレールの遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-71" class="">
-							<th class="company"><a href="https://www.kotsu.metro.tokyo.jp/nippori_toneri/schedule/" title="日暮里・舎人ライナーの運行情報ページ" class="general-anchor">日暮里・舎人ライナー</a></th>
-							<td class="pictgram"><a href="https://www.kotsu.metro.tokyo.jp/nippori_toneri/schedule/" data-sp-href="https://www.kotsu.metro.tokyo.jp/nippori_toneri/schedule/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの日暮里・舎人ライナーの遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-73" class="">
-							<th class="company"><a href="http://chiba-monorail.co.jp/index.php/info-detail/" title="千葉モノレールの運行情報ページ" class="general-anchor">千葉モノレール</a></th>
-							<td class="pictgram"><a href="http://chiba-monorail.co.jp/index.php/info-detail/" data-sp-href="http://chiba-monorail.co.jp/index.php/info-detail/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの千葉モノレールの遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-72" class="">
-							<th class="company"><a href="https://www.tama-monorail.co.jp/monorail/operation/index.html" title="多摩モノレールの運行情報ページ" class="general-anchor">多摩モノレール</a><a href="https://twitter.com/tamamono_info" title="多摩モノレールの公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.tama-monorail.co.jp/monorail/operation/index.html" data-sp-href="https://www.tama-monorail.co.jp/monorail/operation/index.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,78,78,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">11%</span><span class="message">きょうの多摩モノレールの遅延確率：11％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-875" class="">
-							<th class="company"><a href="http://www.seasideline.co.jp/guidance/train_info/" title="横浜シーサイドラインの運行情報ページ" class="general-anchor">横浜シーサイドライン</a></th>
-							<td class="pictgram"><a href="http://www.seasideline.co.jp/guidance/train_info/" data-sp-href="http://www.seasideline.co.jp/guidance/train_info/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの横浜シーサイドラインの遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1315" class="">
-							<th class="company"><a href="http://www.shonan-monorail.co.jp/" title="湘南モノレールの運行情報ページ" class="general-anchor">湘南モノレール</a></th>
-							<td class="pictgram"><a href="http://www.shonan-monorail.co.jp/" data-sp-href="http://www.shonan-monorail.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-802" class="">
-							<th class="company"><a href="http://www.new-shuttle.jp/" title="ニューシャトルの運行情報ページ" class="general-anchor">ニューシャトル</a></th>
-							<td class="pictgram"><a href="http://www.new-shuttle.jp/" data-sp-href="http://www.new-shuttle.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうのニューシャトルの遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1358" class="irregular">
-							<th class="company"><a href="https://town.yukarigaoka.jp/yukariline/" title="山万の運行情報ページ" class="general-anchor">山万</a></th>
-							<td class="pictgram"><a href="https://town.yukarigaoka.jp/yukariline/" data-sp-href="https://town.yukarigaoka.jp/yukariline/" title="遅延などの情報が掲載されています（19時02分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://town.yukarigaoka.jp/yukariline/">ユーカリが丘線</a></td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-1360" class="">
-							<th class="company"><a href="https://www.chichibu-railway.co.jp/" title="秩父鉄道の運行情報ページ" class="general-anchor">秩父鉄道</a><a href="https://twitter.com/ctk_info" title="秩父鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.chichibu-railway.co.jp/" data-sp-href="https://www.chichibu-railway.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-807" class="">
-							<th class="company"><a href="http://www.moka-railway.co.jp/" title="真岡鐵道の運行情報ページ" class="general-anchor">真岡鐵道</a><a href="https://twitter.com/mokasl" title="真岡鐵道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.moka-railway.co.jp/" data-sp-href="http://www.moka-railway.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの真岡鐵道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-808" class="">
-							<th class="company"><a href="http://www.kominato.co.jp/train/index.html" title="小湊鉄道の運行情報ページ" class="general-anchor">小湊鉄道</a></th>
-							<td class="pictgram"><a href="http://www.kominato.co.jp/train/index.html" data-sp-href="http://www.kominato.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの小湊鉄道の遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1322" class="">
-							<th class="company"><a href="http://www.choshi-dentetsu.jp/" title="銚子電気鉄道の運行情報ページ" class="general-anchor">銚子電気鉄道</a></th>
-							<td class="pictgram"><a href="http://www.choshi-dentetsu.jp/" data-sp-href="http://www.choshi-dentetsu.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-811" class="">
-							<th class="company"><a href="http://www.rintetsu.co.jp/" title="鹿島臨海鉄道の運行情報ページ" class="general-anchor">鹿島臨海鉄道</a></th>
-							<td class="pictgram"><a href="http://www.rintetsu.co.jp/" data-sp-href="http://www.rintetsu.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,92,92,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">4%</span><span class="message">きょうの鹿島臨海鉄道の遅延確率：4％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-767" class="irregular">
-							<th class="company"><a href="http://www.fujikyu-railway.jp/" title="富士急行の運行情報ページ" class="general-anchor">富士急行</a></th>
-							<td class="pictgram"><a href="http://www.fujikyu-railway.jp/" data-sp-href="http://www.fujikyu-railway.jp/" title="遅延などの情報が掲載されています（19時02分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://www.fujikyu-railway.jp/">観光列車･特急列車</a></td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの富士急行の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-766" class="">
-							<th class="company"><a href="http://www.izukyu.co.jp/" title="伊豆急行の運行情報ページ" class="general-anchor">伊豆急行</a></th>
-							<td class="pictgram"><a href="http://www.izukyu.co.jp/" data-sp-href="http://www.izukyu.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,82,82,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">9%</span><span class="message">きょうの伊豆急行の遅延確率：9％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-868" class="">
-							<th class="company"><a href="http://www.joshin-dentetsu.co.jp/" title="上信電鉄の運行情報ページ" class="general-anchor">上信電鉄</a><a href="https://twitter.com/joshindentetsu" title="上信電鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.joshin-dentetsu.co.jp/" data-sp-href="http://www.joshin-dentetsu.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの上信電鉄の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-867" class="">
-							<th class="company"><a href="http://www.jomorailway.com/" title="上毛電気鉄道の運行情報ページ" class="general-anchor">上毛電気鉄道</a></th>
-							<td class="pictgram"><a href="http://www.jomorailway.com/" data-sp-href="http://www.jomorailway.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/" title="関東エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの上毛電気鉄道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="trafficinfo-box main-box">
-				<div class="main-box-header">
-					<h2>東海エリア</h2>
-					<p><span class="link-outernal-info">外部サイトあり</span></p>
-				</div>
-
-				<table class="main-table">
-
-					<caption class="no-display">東海エリアの運行情報一覧</caption>
-					<thead class="no-display">
-						<tr>
-							<th class="company">会社・エリア名</th>
-							<th class="pictgram">更新状況</th>
-							<th class="lines">路線名</th>
-							<th class="certificate">遅延証明書</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr id="Traffic-7" class="irregular">
-							<th class="company"><a href="https://traininfo.jr-central.co.jp/zairaisen/index.html" title="JR東海（在来線）の運行情報ページ" class="general-anchor">JR東海（在来線）</a></th>
-							<td class="pictgram"><a href="https://traininfo.jr-central.co.jp/zairaisen/index.html" data-sp-href="https://traininfo.jr-central.co.jp/zairaisen/index.html" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://traininfo.jr-central.co.jp/zairaisen/status_detail.html?line=10007&lang=ja">紀勢線</a></td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-53" class="irregular">
-							<th class="company"><a href="http://www.kotsu.city.nagoya.jp/jp/pc/emergency/index.html" title="名古屋市営地下鉄の運行情報ページ" class="general-anchor">名古屋市営地下鉄</a><a href="https://twitter.com/nagoya_kotsu" title="名古屋市営地下鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.kotsu.city.nagoya.jp/jp/pc/emergency/index.html" data-sp-href="http://www.kotsu.city.nagoya.jp/jp/sp/emergency/index.html" title="お知らせが掲載されています（19時05分現在）" class="main-table-button main-table-button-info"><i class="fas fa-bell"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://www.kotsu.city.nagoya.jp/jp/pc/emergency/">東山線</a></td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,90,90,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">5%</span><span class="message">きょうの名古屋市営地下鉄の遅延確率：5％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-21" class="">
-							<th class="company"><a href="http://top.meitetsu.co.jp/em/" title="名古屋鉄道の運行情報ページ" class="general-anchor">名古屋鉄道</a><a href="https://twitter.com/meitetsu_info" title="名古屋鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://top.meitetsu.co.jp/em/" data-sp-href="http://top.meitetsu.co.jp/sp/em/train_emtop.asp" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,86,86,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">7%</span><span class="message">きょうの名古屋鉄道の遅延確率：7％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-80" class="">
-							<th class="company"><a href="http://www.kintetsu.jp/unkou/unkou.html" title="近畿日本鉄道（名古屋）の運行情報ページ" class="general-anchor">近畿日本鉄道（名古屋）</a></th>
-							<td class="pictgram"><a href="http://www.kintetsu.jp/unkou/unkou.html" data-sp-href="http://www.kintetsu.jp/unkou/unkou.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,72,72,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">14%</span><span class="message">きょうの近畿日本鉄道（名古屋）の遅延確率：14％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-74" class="">
-							<th class="company"><a href="https://www.aonamiline.co.jp/cgi/index.asp" title="あおなみ線の運行情報ページ" class="general-anchor">あおなみ線</a></th>
-							<td class="pictgram"><a href="https://www.aonamiline.co.jp/cgi/index.asp" data-sp-href="https://www.aonamiline.co.jp/sp/index.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうのあおなみ線の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-75" class="">
-							<th class="company"><a href="https://www.aikanrailway.co.jp/train/" title="愛知環状鉄道の運行情報ページ" class="general-anchor">愛知環状鉄道</a></th>
-							<td class="pictgram"><a href="https://www.aikanrailway.co.jp/train/" data-sp-href="https://www.aikanrailway.co.jp/train/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">54%</span><span class="message">きょうの愛知環状鉄道の遅延確率：54％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-751" class="">
-							<th class="company"><a href="https://www.guideway.co.jp/" title="ゆとりーとラインの運行情報ページ" class="general-anchor">ゆとりーとライン</a></th>
-							<td class="pictgram"><a href="https://www.guideway.co.jp/" data-sp-href="https://www.guideway.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">緊急情報がある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうのゆとりーとラインの遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1321" class="">
-							<th class="company"><a href="https://tarumi-railway.com/" title="樽見鉄道の運行情報ページ" class="general-anchor">樽見鉄道</a></th>
-							<td class="pictgram"><a href="https://tarumi-railway.com/" data-sp-href="https://tarumi-railway.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-866" class="">
-							<th class="company"><a href="http://cug.ginet.or.jp/yororailway/unkou.php" title="養老鉄道の運行情報ページ" class="general-anchor">養老鉄道</a></th>
-							<td class="pictgram"><a href="http://cug.ginet.or.jp/yororailway/unkou.php" data-sp-href="http://cug.ginet.or.jp/yororailway/unkou.php" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの養老鉄道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-803" class="">
-							<th class="company"><a href="http://yar.co.jp/" title="四日市あすなろう鉄道の運行情報ページ" class="general-anchor">四日市あすなろう鉄道</a></th>
-							<td class="pictgram"><a href="http://yar.co.jp/" data-sp-href="http://yar.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの四日市あすなろう鉄道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-810" class="">
-							<th class="company"><a href="http://www.toyotetsu.com/" title="豊橋鉄道（渥美線）の運行情報ページ" class="general-anchor">豊橋鉄道（渥美線）</a></th>
-							<td class="pictgram"><a href="http://www.toyotetsu.com/" data-sp-href="http://www.toyotetsu.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの豊橋鉄道（渥美線）の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-776" class="">
-							<th class="company"><a href="https://www.tenhama.co.jp/operation-status/" title="天竜浜名湖鉄道の運行情報ページ" class="general-anchor">天竜浜名湖鉄道</a></th>
-							<td class="pictgram"><a href="https://www.tenhama.co.jp/operation-status/" data-sp-href="https://www.tenhama.co.jp/operation-status/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの天竜浜名湖鉄道の遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-876" class="">
-							<th class="company"><a href="https://www.aketetsu.co.jp/" title="明知鉄道の運行情報ページ" class="general-anchor">明知鉄道</a></th>
-							<td class="pictgram"><a href="https://www.aketetsu.co.jp/" data-sp-href="https://www.aketetsu.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-777" class="irregular">
-							<th class="company"><a href="http://www.entetsu.co.jp/tetsudou/index.html" title="遠州鉄道の運行情報ページ" class="general-anchor">遠州鉄道</a><a href="https://twitter.com/et_train" title="遠州鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.entetsu.co.jp/tetsudou/index.html" data-sp-href="http://www.entetsu.co.jp/tetsudou/index.html" title="お知らせが掲載されています（19時02分現在）" class="main-table-button main-table-button-info"><i class="fas fa-bell"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://www.entetsu.co.jp/tetsudou/">遠州鉄道線</a></td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,90,90,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">5%</span><span class="message">きょうの遠州鉄道の遅延確率：5％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-871" class="">
-							<th class="company"><a href="http://oigawa-railway.co.jp/" title="大井川鐵道の運行情報ページ" class="general-anchor">大井川鐵道</a><a href="https://twitter.com/OigawaRailway" title="大井川鐵道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://oigawa-railway.co.jp/" data-sp-href="http://oigawa-railway.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,90,90,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">5%</span><span class="message">きょうの大井川鐵道の遅延確率：5％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-775" class="irregular">
-							<th class="company"><a href="http://train.shizutetsu.co.jp/" title="静岡鉄道の運行情報ページ" class="general-anchor">静岡鉄道</a><a href="https://twitter.com/shizutetsu_pr" title="静岡鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://train.shizutetsu.co.jp/" data-sp-href="http://train.shizutetsu.co.jp/" title="お知らせが掲載されています（19時02分現在）" class="main-table-button main-table-button-info"><i class="fas fa-bell"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://train.shizutetsu.co.jp/">静岡鉄道線</a></td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの静岡鉄道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1348" class="">
-							<th class="company"><a href="https://www.gakutetsu.jp/" title="岳南電車の運行情報ページ" class="general-anchor">岳南電車</a><a href="https://twitter.com/Gakunaninfo" title="岳南電車の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.gakutetsu.jp/" data-sp-href="https://www.gakutetsu.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-768" class="">
-							<th class="company"><a href="http://www.izuhakone.co.jp/" title="伊豆箱根鉄道の運行情報ページ" class="general-anchor">伊豆箱根鉄道</a></th>
-							<td class="pictgram"><a href="http://www.izuhakone.co.jp/" data-sp-href="http://www.izuhakone.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/" title="東海エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの伊豆箱根鉄道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="trafficinfo-box main-box">
-				<div class="main-box-header">
-					<h2>近畿エリア</h2>
-					<p><span class="link-outernal-info">外部サイトあり</span></p>
-				</div>
-
-				<table class="main-table">
-
-					<caption class="no-display">近畿エリアの運行情報一覧</caption>
-					<thead class="no-display">
-						<tr>
-							<th class="company">会社・エリア名</th>
-							<th class="pictgram">更新状況</th>
-							<th class="lines">路線名</th>
-							<th class="certificate">遅延証明書</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr id="Traffic-43" class="">
-							<th class="company"><a href="https://trafficinfo.westjr.co.jp/kinki.html" title="JR西日本（近畿地区）の運行情報ページ" class="general-anchor">JR西日本（近畿地区）</a></th>
-							<td class="pictgram"><a href="https://trafficinfo.westjr.co.jp/kinki.html" data-sp-href="https://trafficinfo.westjr.co.jp/kinki.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10～15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,18,18,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">41%</span><span class="message">きょうのJR西日本（近畿地区）の遅延確率：41％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-54" class="">
-							<th class="company"><a href="https://subway.osakametro.co.jp/guide/subway_information.php" title="大阪メトロの運行情報ページ" class="general-anchor">大阪メトロ</a><a href="https://twitter.com/osakatransport" title="大阪メトロの公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://subway.osakametro.co.jp/guide/subway_information.php" data-sp-href="https://subway.osakametro.co.jp/guide/subway_information.php" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">10分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの大阪メトロの遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-22" class="irregular">
-							<th class="company"><a href="http://www.kintetsu.jp/unkou/unkou.html" title="近畿日本鉄道（大阪）の運行情報ページ" class="general-anchor">近畿日本鉄道（大阪）</a></th>
-							<td class="pictgram"><a href="http://www.kintetsu.jp/unkou/unkou.html" data-sp-href="http://www.kintetsu.jp/unkou/unkou.html" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://www.kintetsu.jp/unkou/unkou.html">南大阪線･京都線･奈良線･大阪線</a></td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,60,60,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">20%</span><span class="message">きょうの近畿日本鉄道（大阪）の遅延確率：20％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-23" class="irregular">
-							<th class="company"><a href="http://www.nankai.co.jp/railinfo.html" title="南海電気鉄道の運行情報ページ" class="general-anchor">南海電気鉄道</a></th>
-							<td class="pictgram"><a href="http://www.nankai.co.jp/railinfo.html" data-sp-href="http://www.nankai.co.jp/railinfo.html" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://www.traffic.nankai.co.jp/railinfo/01.html">特急サザン･特急ラピート</a></td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,92,92,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">4%</span><span class="message">きょうの南海電気鉄道の遅延確率：4％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-24" class="">
-							<th class="company"><a href="http://www.keihan.co.jp/traffic/traintraffic/" title="京阪電気鉄道の運行情報ページ" class="general-anchor">京阪電気鉄道</a><a href="https://twitter.com/keihan_traffic" title="京阪電気鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.keihan.co.jp/traffic/traintraffic/" data-sp-href="http://www.keihan.co.jp/traffic/traintraffic/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,72,72,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">14%</span><span class="message">きょうの京阪電気鉄道の遅延確率：14％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-25" class="">
-							<th class="company"><a href="http://rail.hankyu.co.jp/railinfo/" title="阪急電鉄の運行情報ページ" class="general-anchor">阪急電鉄</a><a href="https://twitter.com/hankyu_ex" title="阪急電鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://rail.hankyu.co.jp/railinfo/" data-sp-href="http://rail.hankyu.co.jp/railinfo/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">20分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,78,78,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">11%</span><span class="message">きょうの阪急電鉄の遅延確率：11％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-26" class="irregular">
-							<th class="company"><a href="https://rail.hanshin.co.jp/" title="阪神電気鉄道の運行情報ページ" class="general-anchor">阪神電気鉄道</a><a href="https://twitter.com/hanshin_unkou_" title="阪神電気鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://rail.hanshin.co.jp/" data-sp-href="https://rail.hanshin.co.jp/" title="お知らせが掲載されています（19時05分現在）" class="main-table-button main-table-button-info"><i class="fas fa-bell"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://rail.hanshin.co.jp/">神戸高速線･武庫川線･阪神なんば線･阪神本線</a></td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,92,92,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">4%</span><span class="message">きょうの阪神電気鉄道の遅延確率：4％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-64" class="irregular">
-							<th class="company"><a href="http://www.sanyo-railway.co.jp/railway/info.html" title="山陽電気鉄道の運行情報ページ" class="general-anchor">山陽電気鉄道</a></th>
-							<td class="pictgram"><a href="http://www.sanyo-railway.co.jp/railway/info.html" data-sp-href="http://www.sanyo-railway.co.jp/railway/info.html" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://www.sanyo-railway.co.jp/railway/info.html">山陽電鉄線</a></td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,74,74,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">13%</span><span class="message">きょうの山陽電気鉄道の遅延確率：13％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-737" class="irregular">
-							<th class="company"><a href="http://www.city.kyoto.lg.jp/kotsu/" title="京都市営地下鉄の運行情報ページ" class="general-anchor">京都市営地下鉄</a><a href="https://twitter.com/kyotokotsu_info" title="京都市営地下鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.city.kyoto.lg.jp/kotsu/" data-sp-href="http://www.city.kyoto.lg.jp/kotsu/" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://www.city.kyoto.lg.jp/kotsu/">東西線･烏丸線</a></td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,50,50,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">25%</span><span class="message">きょうの京都市営地下鉄の遅延確率：25％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-60" class="irregular">
-							<th class="company"><a href="http://kobe-tp.city.kobe.lg.jp/subway/info.html" title="神戸市営地下鉄の運行情報ページ" class="general-anchor">神戸市営地下鉄</a></th>
-							<td class="pictgram"><a href="http://kobe-tp.city.kobe.lg.jp/subway/info.html" data-sp-href="http://kobe-tp.city.kobe.lg.jp/subway/info.html" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://kobe-tp.city.kobe.lg.jp/subway/info.html">海岸線･西神･山手線</a></td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,72,72,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">14%</span><span class="message">きょうの神戸市営地下鉄の遅延確率：14％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-61" class="">
-							<th class="company"><a href="http://www.osaka-monorail.co.jp/" title="大阪モノレールの運行情報ページ" class="general-anchor">大阪モノレール</a><a href="https://twitter.com/OsakaMonorail" title="大阪モノレールの公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.osaka-monorail.co.jp/" data-sp-href="http://www.osaka-monorail.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">20分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの大阪モノレールの遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-753" class="">
-							<th class="company"><a href="http://www.knt-liner.co.jp/" title="神戸新交通の運行情報ページ" class="general-anchor">神戸新交通</a></th>
-							<td class="pictgram"><a href="http://www.knt-liner.co.jp/" data-sp-href="http://www.knt-liner.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの神戸新交通の遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-70" class="irregular">
-							<th class="company"><a href="http://noseden.hankyu.co.jp/railinfo/" title="能勢電鉄の運行情報ページ" class="general-anchor">能勢電鉄</a></th>
-							<td class="pictgram"><a href="http://noseden.hankyu.co.jp/railinfo/" data-sp-href="http://noseden.hankyu.co.jp/smart/railinfo/" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://noseden.hankyu.co.jp/railinfo/">能勢電鉄線</a></td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">76%</span><span class="message">きょうの能勢電鉄の遅延確率：76％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-69" class="">
-							<th class="company"><a href="http://www.shintetsu.co.jp/cgi-bin/railinfo/unkou.cgi" title="神戸電鉄の運行情報ページ" class="general-anchor">神戸電鉄</a></th>
-							<td class="pictgram"><a href="http://www.shintetsu.co.jp/cgi-bin/railinfo/unkou.cgi" data-sp-href="http://www.shintetsu.co.jp/cgi-bin/railinfo/unkou.cgi" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの神戸電鉄の遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1350" class="">
-							<th class="company"><a href="http://www.hojorailway.jp/" title="北条鉄道の運行情報ページ" class="general-anchor">北条鉄道</a></th>
-							<td class="pictgram"><a href="http://www.hojorailway.jp/" data-sp-href="http://www.hojorailway.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">20分以上の遅れがある場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-804" class="">
-							<th class="company"><a href="http://www.ohmitetudo.co.jp/railway/" title="近江鉄道の運行情報ページ" class="general-anchor">近江鉄道</a></th>
-							<td class="pictgram"><a href="http://www.ohmitetudo.co.jp/railway/" data-sp-href="http://www.ohmitetudo.co.jp/railway/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,88,88,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">6%</span><span class="message">きょうの近江鉄道の遅延確率：6％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-863" class="">
-							<th class="company"><a href="http://www.wakayama-dentetsu.co.jp/" title="和歌山電鐵の運行情報ページ" class="general-anchor">和歌山電鐵</a></th>
-							<td class="pictgram"><a href="http://www.wakayama-dentetsu.co.jp/" data-sp-href="http://www.wakayama-dentetsu.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"><a href="./category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/" title="近畿エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの和歌山電鐵の遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1320" class="">
-							<th class="company"><a href="http://www.igatetsu.co.jp/" title="伊賀鉄道の運行情報ページ" class="general-anchor">伊賀鉄道</a></th>
-							<td class="pictgram"><a href="http://www.igatetsu.co.jp/" data-sp-href="http://www.igatetsu.co.jp/" title="情報が判別できません（19時02分現在）" class="main-table-button main-table-button-unknown"><i class="fas fa-ellipsis-h"></i>情報不明</a></td>
-							<td class="lines">詳細はリンク先をご確認ください</td>
-							<td class="predict"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="trafficinfo-box main-box">
-				<div class="main-box-header">
-					<h2>九州エリア</h2>
-					<p><span class="link-outernal-info">外部サイトあり</span></p>
-				</div>
-
-				<table class="main-table">
-
-					<caption class="no-display">九州エリアの運行情報一覧</caption>
-					<thead class="no-display">
-						<tr>
-							<th class="company">会社・エリア名</th>
-							<th class="pictgram">更新状況</th>
-							<th class="lines">路線名</th>
-							<th class="certificate">遅延証明書</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr id="Traffic-10" class="">
-							<th class="company"><a href="https://www.jrkyushu.co.jp/trains/info/" title="JR九州の運行情報ページ" class="general-anchor">JR九州</a></th>
-							<td class="pictgram"><a href="https://www.jrkyushu.co.jp/trains/info/" data-sp-href="https://www.jrkyushu.co.jp/trains/info/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/" title="九州エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">53%</span><span class="message">きょうのJR九州の遅延確率：53％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-55" class="">
-							<th class="company"><a href="http://subway.city.fukuoka.lg.jp/status/" title="福岡市営地下鉄の運行情報ページ" class="general-anchor">福岡市営地下鉄</a></th>
-							<td class="pictgram"><a href="http://subway.city.fukuoka.lg.jp/status/" data-sp-href="http://subway.city.fukuoka.lg.jp/sp/status/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/" title="九州エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの福岡市営地下鉄の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-27" class="">
-							<th class="company"><a href="http://jik.nishitetsu.jp/traffic/index_pc.html" title="西日本鉄道の運行情報ページ" class="general-anchor">西日本鉄道</a><a href="https://twitter.com/nishitetsu_info" title="西日本鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://jik.nishitetsu.jp/traffic/index_pc.html" data-sp-href="http://jik.nishitetsu.jp/traffic/index_pc.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">台風や大雪等による遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/" title="九州エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,76,76,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">12%</span><span class="message">きょうの西日本鉄道の遅延確率：12％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-750" class="">
-							<th class="company"><a href="http://www.kitakyushu-monorail.co.jp/" title="北九州モノレールの運行情報ページ" class="general-anchor">北九州モノレール</a></th>
-							<td class="pictgram"><a href="http://www.kitakyushu-monorail.co.jp/" data-sp-href="http://www.kitakyushu-monorail.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/" title="九州エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの北九州モノレールの遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-782" class="">
-							<th class="company"><a href="http://www.amatetsu.jp/" title="甘木鉄道の運行情報ページ" class="general-anchor">甘木鉄道</a></th>
-							<td class="pictgram"><a href="http://www.amatetsu.jp/" data-sp-href="http://www.amatetsu.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">災害や事故等による遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/" title="九州エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの甘木鉄道の遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-783" class="">
-							<th class="company"><a href="http://matutetu.com/" title="松浦鉄道の運行情報ページ" class="general-anchor">松浦鉄道</a></th>
-							<td class="pictgram"><a href="http://matutetu.com/" data-sp-href="http://matutetu.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">災害や事故等による遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/" title="九州エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの松浦鉄道の遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1354" class="">
-							<th class="company"><a href="http://www.heichiku.net/" title="平成筑豊鉄道の運行情報ページ" class="general-anchor">平成筑豊鉄道</a></th>
-							<td class="pictgram"><a href="http://www.heichiku.net/" data-sp-href="http://www.heichiku.net/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">災害や事故等による遅れがある場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-1324" class="">
-							<th class="company"><a href="http://www.shimatetsu.co.jp/" title="島原鉄道の運行情報ページ" class="general-anchor">島原鉄道</a></th>
-							<td class="pictgram"><a href="http://www.shimatetsu.co.jp/" data-sp-href="http://www.shimatetsu.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">災害や事故等による遅れがある場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-1356" class="">
-							<th class="company"><a href="https://www.kumamotodentetsu.co.jp/unkou/" title="熊本電気鉄道の運行情報ページ" class="general-anchor">熊本電気鉄道</a></th>
-							<td class="pictgram"><a href="https://www.kumamotodentetsu.co.jp/unkou/" data-sp-href="https://www.kumamotodentetsu.co.jp/unkou/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">災害や事故等による遅れがある場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-754" class="">
-							<th class="company"><a href="https://www.hs-orange.com/hpkiji/pub/List.aspx?c_id=3&amp;class_set_id=1&amp;class_id=1" title="肥薩おれんじ鉄道の運行情報ページ" class="general-anchor">肥薩おれんじ鉄道</a></th>
-							<td class="pictgram"><a href="https://www.hs-orange.com/hpkiji/pub/List.aspx?c_id=3&amp;class_set_id=1&amp;class_id=1" data-sp-href="http://www.hs-orange.com/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">災害や事故等による遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/" title="九州エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの肥薩おれんじ鉄道の遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1318" class="">
-							<th class="company"><a href="http://www.mt-torokko.com/" title="南阿蘇鉄道の運行情報ページ" class="general-anchor">南阿蘇鉄道</a></th>
-							<td class="pictgram"><a href="http://www.mt-torokko.com/" data-sp-href="http://www.mt-torokko.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">災害や事故等による遅れがある場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="trafficinfo-box main-box">
-				<div class="main-box-header">
-					<h2>その他のエリア</h2>
-					<p><span class="link-outernal-info">外部サイトあり</span></p>
-				</div>
-
-				<table class="main-table">
-
-					<caption class="no-display">その他のエリアの運行情報一覧</caption>
-					<thead class="no-display">
-						<tr>
-							<th class="company">会社・エリア名</th>
-							<th class="pictgram">更新状況</th>
-							<th class="lines">路線名</th>
-							<th class="certificate">遅延証明書</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr id="Traffic-1" class="">
-							<th class="company"><a href="https://www3.jrhokkaido.co.jp/webunkou/" title="JR北海道（在来線）の運行情報ページ" class="general-anchor">JR北海道（在来線）</a><a href="https://twitter.com/jrhokkaido_info" title="JR北海道（在来線）の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www3.jrhokkaido.co.jp/webunkou/" data-sp-href="https://www3.jrhokkaido.co.jp/webunkou/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E6%B5%B7%E9%81%93%E3%82%A8%E3%83%AA%E3%82%A2/" title="北海道エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">56%</span><span class="message">きょうのJR北海道（在来線）の遅延確率：56％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-755" class="">
-							<th class="company"><a href="https://operationstatus.city.sapporo.jp/unkojoho/" title="札幌市営地下鉄の運行情報ページ" class="general-anchor">札幌市営地下鉄</a><a href="https://twitter.com/operation_st" title="札幌市営地下鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://operationstatus.city.sapporo.jp/unkojoho/" data-sp-href="http://transitfare.city.sapporo.jp/unkojoho/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E6%B5%B7%E9%81%93%E3%82%A8%E3%83%AA%E3%82%A2/" title="北海道エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの札幌市営地下鉄の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-859" class="">
-							<th class="company"><a href="http://www.shr-isaribi.jp/" title="道南いさりび鉄道の運行情報ページ" class="general-anchor">道南いさりび鉄道</a></th>
-							<td class="pictgram"><a href="http://www.shr-isaribi.jp/" data-sp-href="http://www.shr-isaribi.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E6%B5%B7%E9%81%93%E3%82%A8%E3%83%AA%E3%82%A2/" title="北海道エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの道南いさりび鉄道の遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-3" class="">
-							<th class="company"><a href="http://traininfo.jreast.co.jp/train_info/chyokyori.aspx" title="JR東日本（特急列車）の運行情報ページ" class="general-anchor">JR東日本（特急列車）</a><a href="https://twitter.com/JRE_Lim_Exp_etc" title="JR東日本（特急列車）の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://traininfo.jreast.co.jp/train_info/chyokyori.aspx" data-sp-href="http://traininfo.jreast.co.jp/train_info/chyokyori.aspx" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-4" class="">
-							<th class="company"><a href="https://traininfo.jreast.co.jp/train_info/tohoku.aspx" title="JR東日本（東北地区）の運行情報ページ" class="general-anchor">JR東日本（東北地区）</a><a href="https://twitter.com/JRE_Tohoku_A" title="JR東日本（東北地区）の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://traininfo.jreast.co.jp/train_info/tohoku.aspx" data-sp-href="https://traininfo.jreast.co.jp/train_info/tohoku.aspx" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">99%</span><span class="message">きょうのJR東日本（東北地区）の遅延確率：99％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-874" class="">
-							<th class="company"><a href="https://konantetsudo.jp/" title="弘南鉄道の運行情報ページ" class="general-anchor">弘南鉄道</a></th>
-							<td class="pictgram"><a href="https://konantetsudo.jp/" data-sp-href="https://konantetsudo.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,84,84,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">8%</span><span class="message">きょうの弘南鉄道の遅延確率：8％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-67" class="">
-							<th class="company"><a href="http://aoimorirailway.com/unko-info" title="青い森鉄道の運行情報ページ" class="general-anchor">青い森鉄道</a></th>
-							<td class="pictgram"><a href="http://aoimorirailway.com/unko-info" data-sp-href="http://aoimorirailway.com/unko-info" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,44,44,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">28%</span><span class="message">きょうの青い森鉄道の遅延確率：28％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-81" class="">
-							<th class="company"><a href="http://igr.jp/train_info/" title="IGRいわて銀河鉄道の運行情報ページ" class="general-anchor">IGRいわて銀河鉄道</a></th>
-							<td class="pictgram"><a href="http://igr.jp/train_info/" data-sp-href="http://igr.jp/train_info/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,84,84,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">8%</span><span class="message">きょうのIGRいわて銀河鉄道の遅延確率：8％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-76" class="">
-							<th class="company"><a href="http://www.sanrikutetsudou.com/" title="三陸鉄道の運行情報ページ" class="general-anchor">三陸鉄道</a><a href="https://twitter.com/santetsu_kun" title="三陸鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.sanrikutetsudou.com/" data-sp-href="http://www.sanrikutetsudou.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">61%</span><span class="message">きょうの三陸鉄道の遅延確率：61％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-63" class="">
-							<th class="company"><a href="http://www.kotsu.city.sendai.jp/unkou/" title="仙台市営地下鉄の運行情報ページ" class="general-anchor">仙台市営地下鉄</a><a href="https://twitter.com/sendaishi_kotu" title="仙台市営地下鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.kotsu.city.sendai.jp/unkou/" data-sp-href="http://www.kotsu.city.sendai.jp/unkou/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの仙台市営地下鉄の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1346" class="">
-							<th class="company"><a href="https://www.akita-nairiku.com/" title="秋田内陸縦貫鉄道の運行情報ページ" class="general-anchor">秋田内陸縦貫鉄道</a></th>
-							<td class="pictgram"><a href="https://www.akita-nairiku.com/" data-sp-href="https://www.akita-nairiku.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-805" class="irregular">
-							<th class="company"><a href="http://www.abukyu.co.jp/" title="阿武隈急行の運行情報ページ" class="general-anchor">阿武隈急行</a></th>
-							<td class="pictgram"><a href="http://www.abukyu.co.jp/" data-sp-href="http://www.abukyu.co.jp/" title="遅延などの情報が掲載されています（19時02分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://www.abukyu.co.jp/">阿武隈急行線</a></td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,90,90,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">5%</span><span class="message">きょうの阿武隈急行の遅延確率：5％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1323" class="">
-							<th class="company"><a href="https://ii-den.jp" title="福島交通の運行情報ページ" class="general-anchor">福島交通</a></th>
-							<td class="pictgram"><a href="https://ii-den.jp" data-sp-href="https://ii-den.jp" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-806" class="">
-							<th class="company"><a href="http://www.aizutetsudo.jp/" title="会津鉄道の運行情報ページ" class="general-anchor">会津鉄道</a></th>
-							<td class="pictgram"><a href="http://www.aizutetsudo.jp/" data-sp-href="http://www.aizutetsudo.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"><a href="./category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/" title="東北エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,90,90,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">5%</span><span class="message">きょうの会津鉄道の遅延確率：5％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-6" class="irregular">
-							<th class="company"><a href="https://traininfo.jreast.co.jp/train_info/shinetsu.aspx" title="JR東日本（信越地区）の運行情報ページ" class="general-anchor">JR東日本（信越地区）</a><a href="https://twitter.com/jre_shinetsu_a" title="JR東日本（信越地区）の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://traininfo.jreast.co.jp/train_info/shinetsu.aspx" data-sp-href="https://traininfo.jreast.co.jp/train_info/shinetsu.aspx" title="遅延などの情報が掲載されています（19時05分現在）" class="main-table-button main-table-button-caution"><i class="fas fa-exclamation-triangle"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="https://traininfo.jreast.co.jp/train_info/shinetsu.aspx">小海線</a></td>
-							<td class="predict"><a href="./category/%E4%BF%A1%E8%B6%8A%E3%82%A8%E3%83%AA%E3%82%A2/" title="信越エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,50,50,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">25%</span><span class="message">きょうのJR東日本（信越地区）の遅延確率：25％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-62" class="">
-							<th class="company"><a href="http://www.hokuhoku.co.jp/unkou/pcGuide.html" title="北越急行の運行情報ページ" class="general-anchor">北越急行</a></th>
-							<td class="pictgram"><a href="http://www.hokuhoku.co.jp/unkou/pcGuide.html" data-sp-href="http://www.hokuhoku.co.jp/unkou/pcGuide.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">各列車の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E9%99%B8%E3%82%A8%E3%83%AA%E3%82%A2/" title="北陸エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">52%</span><span class="message">きょうの北越急行の遅延確率：52％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-773" class="">
-							<th class="company"><a href="http://www.nagaden-net.co.jp/" title="長野電鉄の運行情報ページ" class="general-anchor">長野電鉄</a><a href="https://twitter.com/u_nagaden" title="長野電鉄の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.nagaden-net.co.jp/" data-sp-href="http://www.nagaden-net.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%BF%A1%E8%B6%8A%E3%82%A8%E3%83%AA%E3%82%A2/" title="信越エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,84,84,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">8%</span><span class="message">きょうの長野電鉄の遅延確率：8％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-68" class="">
-							<th class="company"><a href="https://www.shinanorailway.co.jp/" title="しなの鉄道の運行情報ページ" class="general-anchor">しなの鉄道</a><a href="https://twitter.com/shinanorailway1" title="しなの鉄道の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://www.shinanorailway.co.jp/" data-sp-href="https://www.shinanorailway.co.jp/sp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%BF%A1%E8%B6%8A%E3%82%A8%E3%83%AA%E3%82%A2/" title="信越エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,88,88,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">6%</span><span class="message">きょうのしなの鉄道の遅延確率：6％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-864" class="">
-							<th class="company"><a href="http://www.uedadentetsu.com/" title="上田電鉄の運行情報ページ" class="general-anchor">上田電鉄</a></th>
-							<td class="pictgram"><a href="http://www.uedadentetsu.com/" data-sp-href="http://www.uedadentetsu.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%BF%A1%E8%B6%8A%E3%82%A8%E3%83%AA%E3%82%A2/" title="信越エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの上田電鉄の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-865" class="">
-							<th class="company"><a href="http://www.alpico.co.jp/traffic/trafficinfo/" title="松本電鉄の運行情報ページ" class="general-anchor">松本電鉄</a></th>
-							<td class="pictgram"><a href="http://www.alpico.co.jp/traffic/trafficinfo/" data-sp-href="http://www.alpico.co.jp/traffic/trafficinfo/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%BF%A1%E8%B6%8A%E3%82%A8%E3%83%AA%E3%82%A2/" title="信越エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの松本電鉄の遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-787" class="">
-							<th class="company"><a href="http://www.echigo-tokimeki.co.jp/" title="えちごトキめき鉄道の運行情報ページ" class="general-anchor">えちごトキめき鉄道</a></th>
-							<td class="pictgram"><a href="http://www.echigo-tokimeki.co.jp/" data-sp-href="http://www.echigo-tokimeki.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%BF%A1%E8%B6%8A%E3%82%A8%E3%83%AA%E3%82%A2/" title="信越エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,88,88,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">6%</span><span class="message">きょうのえちごトキめき鉄道の遅延確率：6％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-785" class="">
-							<th class="company"><a href="https://www.chitetsu.co.jp/?page_id=38338" title="富山地方鉄道（鉄道線）の運行情報ページ" class="general-anchor">富山地方鉄道（鉄道線）</a></th>
-							<td class="pictgram"><a href="https://www.chitetsu.co.jp/?page_id=38338" data-sp-href="https://www.chitetsu.co.jp/?page_id=38338" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E9%99%B8%E3%82%A8%E3%83%AA%E3%82%A2/" title="北陸エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの富山地方鉄道（鉄道線）の遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-788" class="">
-							<th class="company"><a href="http://trafficinfo.ainokaze.co.jp/" title="あいの風とやま鉄道の運行情報ページ" class="general-anchor">あいの風とやま鉄道</a></th>
-							<td class="pictgram"><a href="http://trafficinfo.ainokaze.co.jp/" data-sp-href="http://trafficinfo.ainokaze.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">各列車の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E9%99%B8%E3%82%A8%E3%83%AA%E3%82%A2/" title="北陸エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,68,68,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">16%</span><span class="message">きょうのあいの風とやま鉄道の遅延確率：16％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-789" class="">
-							<th class="company"><a href="http://www.ishikawa-railway.jp/" title="IRいしかわ鉄道の運行情報ページ" class="general-anchor">IRいしかわ鉄道</a></th>
-							<td class="pictgram"><a href="http://www.ishikawa-railway.jp/" data-sp-href="http://www.ishikawa-railway.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E9%99%B8%E3%82%A8%E3%83%AA%E3%82%A2/" title="北陸エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,90,90,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">5%</span><span class="message">きょうのIRいしかわ鉄道の遅延確率：5％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-41" class="">
-							<th class="company"><a href="https://trafficinfo.westjr.co.jp/hokuriku.html" title="JR西日本（北陸地区）の運行情報ページ" class="general-anchor">JR西日本（北陸地区）</a><a href="https://twitter.com/jrwest_Hokuriku" title="JR西日本（北陸地区）の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://trafficinfo.westjr.co.jp/hokuriku.html" data-sp-href="https://trafficinfo.westjr.co.jp/hokuriku.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E9%99%B8%E3%82%A8%E3%83%AA%E3%82%A2/" title="北陸エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,38,38,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">31%</span><span class="message">きょうのJR西日本（北陸地区）の遅延確率：31％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-786" class="">
-							<th class="company"><a href="http://www.hokutetsu.co.jp/unkojoho" title="北陸鉄道の運行情報ページ" class="general-anchor">北陸鉄道</a></th>
-							<td class="pictgram"><a href="http://www.hokutetsu.co.jp/unkojoho" data-sp-href="http://www.hokutetsu.co.jp/unkojoho" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%8C%97%E9%99%B8%E3%82%A8%E3%83%AA%E3%82%A2/" title="北陸エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの北陸鉄道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-66" class="">
-							<th class="company"><a href="https://trafficinfo.westjr.co.jp/ex_index.html" title="JR西日本（特急列車）の運行情報ページ" class="general-anchor">JR西日本（特急列車）</a><a href="https://twitter.com/jrwest_Express" title="JR西日本（特急列車）の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="https://trafficinfo.westjr.co.jp/ex_index.html" data-sp-href="https://trafficinfo.westjr.co.jp/ex_index.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-42" class="">
-							<th class="company"><a href="https://trafficinfo.westjr.co.jp/chugoku.html" title="JR西日本（中国地区）の運行情報ページ" class="general-anchor">JR西日本（中国地区）</a></th>
-							<td class="pictgram"><a href="https://trafficinfo.westjr.co.jp/chugoku.html" data-sp-href="https://trafficinfo.westjr.co.jp/chugoku.html" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B8%AD%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="中国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,0,0,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">52%</span><span class="message">きょうのJR西日本（中国地区）の遅延確率：52％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-79" class="">
-							<th class="company"><a href="http://www.chizukyu.co.jp/trafficinfo/" title="智頭急行の運行情報ページ" class="general-anchor">智頭急行</a></th>
-							<td class="pictgram"><a href="http://www.chizukyu.co.jp/trafficinfo/" data-sp-href="http://www.chizukyu.co.jp/trafficinfo/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B8%AD%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="中国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,78,78,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">11%</span><span class="message">きょうの智頭急行の遅延確率：11％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1362" class="">
-							<th class="company"><a href="https://wakatetsu.co.jp/" title="若桜鉄道の運行情報ページ" class="general-anchor">若桜鉄道</a></th>
-							<td class="pictgram"><a href="https://wakatetsu.co.jp/" data-sp-href="https://wakatetsu.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">ダイヤ乱れがある場合等に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-870" class="">
-							<th class="company"><a href="http://www.mizurin.co.jp/" title="水島臨海鉄道の運行情報ページ" class="general-anchor">水島臨海鉄道</a></th>
-							<td class="pictgram"><a href="http://www.mizurin.co.jp/" data-sp-href="http://www.mizurin.co.jp/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B8%AD%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="中国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの水島臨海鉄道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-784" class="">
-							<th class="company"><a href="http://plus.harenet.ne.jp/~ibarasen/" title="井原鉄道の運行情報ページ" class="general-anchor">井原鉄道</a></th>
-							<td class="pictgram"><a href="http://plus.harenet.ne.jp/~ibarasen/" data-sp-href="http://plus.harenet.ne.jp/~ibarasen/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B8%AD%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="中国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,94,94,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">3%</span><span class="message">きょうの井原鉄道の遅延確率：3％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-1352" class="">
-							<th class="company"><a href="http://nishikigawa.com/" title="錦川鉄道の運行情報ページ" class="general-anchor">錦川鉄道</a></th>
-							<td class="pictgram"><a href="http://nishikigawa.com/" data-sp-href="http://nishikigawa.com/" title="遅延などの情報は掲載されていません（19時02分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れや運休等が発生する場合に掲載</td>
-							<td class="predict"></td>
-						</tr>
-						<tr id="Traffic-873" class="irregular">
-							<th class="company"><a href="http://asatetu.com/" title="阿佐海岸鉄道の運行情報ページ" class="general-anchor">阿佐海岸鉄道</a></th>
-							<td class="pictgram"><a href="http://asatetu.com/" data-sp-href="http://asatetu.com/" title="お知らせが掲載されています（19時02分現在）" class="main-table-button main-table-button-info"><i class="fas fa-bell"></i>情報あり</a></td>
-							<td class="lines"><a class="general-anchor" href="http://asatetu.com/">阿佐東線</a></td>
-							<td class="predict"><a href="./category/%E5%9B%9B%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="四国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうの阿佐海岸鉄道の遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-9" class="">
-							<th class="company"><a href="http://www.jr-shikoku.co.jp/info/" title="JR四国の運行情報ページ" class="general-anchor">JR四国</a><a href="https://twitter.com/jr_shikoku_info" title="JR四国の公式Twitter"><img src="//images.tetsudo.com/interface-icon/twitter-16x16.png" class="twitter-icon" alt="Twitter"></a></th>
-							<td class="pictgram"><a href="http://www.jr-shikoku.co.jp/info/" data-sp-href="http://www.jr-shikoku.co.jp/info/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%9B%9B%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="四国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,74,74,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">13%</span><span class="message">きょうのJR四国の遅延確率：13％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-800" class="">
-							<th class="company"><a href="http://www.kotoden.co.jp/publichtm/i-mode/unkou/densya.htm" title="高松琴平電気鉄道の運行情報ページ" class="general-anchor">高松琴平電気鉄道</a></th>
-							<td class="pictgram"><a href="http://www.kotoden.co.jp/publichtm/i-mode/unkou/densya.htm" data-sp-href="http://www.kotoden.co.jp/publichtm/i-mode/unkou/densya.htm" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">30分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E4%B8%AD%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="中国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,96,96,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">2%</span><span class="message">きょうの高松琴平電気鉄道の遅延確率：2％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-801" class="">
-							<th class="company"><a href="http://www.iyotetsu.co.jp/kinkyu/" title="伊予鉄道（郊外電車）の運行情報ページ" class="general-anchor">伊予鉄道（郊外電車）</a></th>
-							<td class="pictgram"><a href="http://www.iyotetsu.co.jp/kinkyu/" data-sp-href="http://www.iyotetsu.co.jp/kinkyu/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">大幅な遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%9B%9B%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="四国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,76,76,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">12%</span><span class="message">きょうの伊予鉄道（郊外電車）の遅延確率：12％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-						<tr id="Traffic-82" class="">
-							<th class="company"><a href="http://www.yui-rail.co.jp/" title="ゆいレールの運行情報ページ" class="general-anchor">ゆいレール</a></th>
-							<td class="pictgram"><a href="http://www.yui-rail.co.jp/" data-sp-href="http://www.yui-rail.co.jp/" title="遅延などの情報は掲載されていません（19時05分現在）" class="main-table-button "><i class="far fa-circle"></i>情報なし</a></td>
-							<td class="lines">15分以上の遅れがある場合に掲載</td>
-							<td class="predict"><a href="./category/%E5%9B%9B%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/" title="四国エリアの鉄道遅延情報" class="general-anchor common-tooltip"  style="color: rgba(128,98,98,1.00);"><i class="fas fa-exclamation-triangle"></i><span class="rate">1%</span><span class="message">きょうのゆいレールの遅延確率：1％<br>リンク先で各路線の遅延確率もご覧ください。</span></a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-		</div>
-
-<!--
-		<div style="border:1px dotted black; width:95%; margin:15px auto;">
-			<p style="margin-left:10px;" class="main-text">どのくらいの風や雨で鉄道は止まる？ →［<a href="./docs/wind.html" class="general-anchor" title="強風時の鉄道運転基準（JR・大手私鉄）">強風時の運転基準</a>］［<a href="./docs/rain.html" class="general-anchor" title="大雨時の鉄道運転基準（JR・大手私鉄）">大雨時の運転基準</a>］</p>
-		</div>
--->
-
-
-        <div id="_popIn_recommend"></div>
-        <script>
-            (function() {
-                var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.charset = "utf-8"; pa.async = true;
-                pa.src = window.location.protocol + "//api.popin.cc/searchbox/tetsudo.js";
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-            })(); 
-        </script>
-	</main>
-
-	</div>
-
-<!--==========Common Right Division==========-->
-
-	<div class="common-right-div">
-
-
-		<div class="ads-medium-rectangle-c">
-            <!-- /83555300/asahi_interactive/tetsudo_com/pc_list_right_1st -->
-            <div id="pc_list_right_1st"></div>
-            <script>
-                googletag.cmd.push(function() { googletag.display('pc_list_right_1st'); });
-            </script>
-
-            <!-- /83555300/asahi_interactive/tetsudo_com/sp_list_footer_1st -->
-            <div id="sp_list_footer_1st"></div>
-            <script>
-                googletag.cmd.push(function() { googletag.display('sp_list_footer_1st'); });
-            </script>
-		</div>
-				<div class="ads-asahicom-right main-box">
-					<div class="main-box-header">
-						<h3>鉄道コムおすすめ情報</h3>
-					</div>
-					<div class="pickup-item pickup-first">
-	                    <p class="left-image"><a href="/report/323/" title="京急新1000形20次車の外観" class="general-image-anchor" data-ga-event-label="京急新1000形20次車の外観" data-ga-event-value="1"><img src="https://images.tetsudo.com/asacom/202104/20210502.jpg" alt="画像"></a></p>
-    	                <div>
-        	                <h4><a href="/report/323/" title="京急新1000形20次車の外観" class="general-anchor" data-ga-event-label="京急新1000形20次車の外観" data-ga-event-value="1">京急新1000形20次車の外観</a></h4>
-        	                <p>赤色に塗装されたステンレス車体、制御機器などの床下機器を、写真で詳しく…</p>
-        	            </div>
-					</div>
-					<div class="pickup-item">
-	                    <p class="left-image"><a href="/report/321/" title="羽田空港アクセス線の現状" class="general-image-anchor" data-ga-event-label="羽田空港アクセス線の現状" data-ga-event-value="2"><img src="https://images.tetsudo.com/asacom/202104/20210429.jpg" alt="画像"></a></p>
-    	                <div>
-        	                <h4><a href="/report/321/" title="羽田空港アクセス線の現状" class="general-anchor" data-ga-event-label="羽田空港アクセス線の現状" data-ga-event-value="2">羽田空港アクセス線の現状</a></h4>
-        	                <p>JR東日本が計画を進める新路線「羽田空港アクセス線」。その予定地の現状は？</p>
-        	            </div>
-					</div>
-					<div class="pickup-item">
-	                    <p class="left-image"><a href="/news/2454/" title="路線名は「西九州新幹線」" class="general-image-anchor" data-ga-event-label="路線名は「西九州新幹線」" data-ga-event-value="3"><img src="https://images.tetsudo.com/asacom/202010/20201028.jpg" alt="画像"></a></p>
-    	                <div>
-        	                <h4><a href="/news/2454/" title="路線名は「西九州新幹線」" class="general-anchor" data-ga-event-label="路線名は「西九州新幹線」" data-ga-event-value="3">路線名は「西九州新幹線」</a></h4>
-        	                <p>九州新幹線武雄温泉～長崎間の路線名は「西九州新幹線」に。2022年秋ごろ開業予定。</p>
-        	            </div>
-					</div>
-					<div class="pickup-item">
-	                    <p class="left-image"><a href="/news/2451/" title="東海道新幹線乗り放題" class="general-image-anchor" data-ga-event-label="東海道新幹線乗り放題" data-ga-event-value="4"><img src="https://images.tetsudo.com/asacom/202012/20201212.jpg" alt="画像"></a></p>
-    	                <div>
-        	                <h4><a href="/news/2451/" title="東海道新幹線乗り放題" class="general-anchor" data-ga-event-label="東海道新幹線乗り放題" data-ga-event-value="4">東海道新幹線乗り放題</a></h4>
-        	                <p>東海道新幹線が乗り放題のワーケーションプラン。1人1室6泊7日で9万円から。</p>
-        	            </div>
-					</div>
-					<div class="pickup-item">
-	                    <p class="left-image"><a href="/news/2452/" title="車両愛称が発表" class="general-image-anchor" data-ga-event-label="車両愛称が発表" data-ga-event-value="5"><img src="https://images.tetsudo.com/asacom/202003/20200331.jpg" alt="画像"></a></p>
-    	                <div>
-        	                <h4><a href="/news/2452/" title="車両愛称が発表" class="general-anchor" data-ga-event-label="車両愛称が発表" data-ga-event-value="5">車両愛称が発表</a></h4>
-        	                <p>「芳賀・宇都宮LRT」の車両愛称は「ライトライン」に。全19停留場の正式名称も発表。</p>
-        	            </div>
-					</div>
-					<div class="pickup-item">
-	                    <p class="left-image"><a href="/event/calendar/202104/" title="5月の鉄道イベント一覧" class="general-image-anchor" data-ga-event-label="5月の鉄道イベント一覧" data-ga-event-value="6"><img src="https://images.tetsudo.com/asacom/calendar05.jpg" alt="画像"></a></p>
-    	                <div>
-        	                <h4><a href="/event/calendar/202104/" title="5月の鉄道イベント一覧" class="general-anchor" data-ga-event-label="5月の鉄道イベント一覧" data-ga-event-value="6">5月の鉄道イベント一覧</a></h4>
-        	                <p>新緑がまぶしい季節となりました。5月のプラン立てには、鉄道コムのイベント情報をどうぞ。</p>
-        	            </div>
-					</div>
-					<div class="pickup-item">
-	                    <p class="left-image"><a href="/chain/" title="みんなで「駅つなゲー」" class="general-image-anchor" data-ga-event-label="みんなで「駅つなゲー」" data-ga-event-value="7"><img src="https://images.tetsudo.com/asacom/20200501.jpg" alt="画像"></a></p>
-    	                <div>
-        	                <h4><a href="/chain/" title="みんなで「駅つなゲー」" class="general-anchor" data-ga-event-label="みんなで「駅つなゲー」" data-ga-event-value="7">みんなで「駅つなゲー」</a></h4>
-        	                <p>しりとり、なかとり……駅名をつないで旅行気分。自宅でも盛り上がれる「駅つなゲー」はいかが？</p>
-        	            </div>
-					</div>
-
-        <div id="pc_list_infeed"></div>
-        <!-- /83555300/asahi_interactive/tetsudo_com/pc_list_infeed -->
-        <script>
-            googletag.cmd.push(function() { googletag.display('pc_list_infeed'); });
-        </script>
-        <div id="sp_list_infeed"></div>
-        <!-- /83555300/asahi_interactive/tetsudo_com/sp_list_infeed -->
-        <script>
-            googletag.cmd.push(function() { googletag.display('sp_list_infeed'); });
-        </script>
-                </div>
-
-			<div id="common-mobile-popup" class="common-mobile-popup" data-nowtime="20210506190719">
-
-				<ul>
-
-				</ul>
-
-			</div>
-			<script src="/scripts/mobile-popup.js"></script>
-
-
-
-	<!--Help Plug-in-->
-		<div class="information-plugin main-box">
-
-			<h3><img src="//images.tetsudo.com/interface-icon/info-16x16.png" alt="ヘルプ" title="ヘルプ" class="interface-icon-16x16">詳細は公式サイトでご確認ください</h3>
-			<hr>
-			<p>「運行情報サイト更新状況」は、鉄道各社局のウェブサイトのうち、列車運行情報を提供するページの更新を自動的に検出して表示するものです。</p>
-			<p>運行情報の内容については、リンクしている各鉄道会社のページをご参照ください。</p>
-			<p>このページの表示内容がリンク先と異なる場合は、お手数ですが<a href="/help/inquiry.html" title="ご意見・ご要望" class="general-anchor">こちら</a>からお知らせください。</p>
-<!--			<p>運行情報に関する詳しい内容は、 <a href="/help/traffic/" title="鉄道イベント情報のヘルプ" class="general-anchor">運行情報サイト更新状況のヘルプ</a>をご覧ください。</p>-->
-
-		</div>
-
-		<div class="main-box">
-			<div class="main-box-header main-box-header-social">
-				<h3>Twitter新着情報</h3>
-				<p><a href="https://twitter.com/tetsudo_traffic">@tetsudo_traffic</a></p>
-			</div>
-			<a class="twitter-timeline general-anchor" data-lang="ja" data-theme="light" data-link-color="#0066ff" href="https://twitter.com/tetsudo_traffic/lists/tetsudo-traffic" data-chrome="noheader nofooter" data-tweet-limit="3">A Twitter List by tetsudo_traffic</a>
-			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-		</div>
-
-		<div class="page-index-plugin main-box">
-
-			<div class="main-box-header">
-				<h3>ほかの運行情報Webサイト</h3>
-			</div>
-
-			<ul class="first-layer">
-
-            	<li><a href="http://www.asahi.com/traffic/train.html" title="鉄道運行情報" class="general-anchor">鉄道運行情報</a> - 朝日新聞デジタル</li>
-            	<li><a href="http://www.jr.cyberstation.ne.jp/" title="新幹線運転情報" class="general-anchor">新幹線運転情報</a> - JR CYBER STATION</li>
-            	<li><a href="http://transit.yahoo.co.jp/" title="運行情報" class="general-anchor">運行情報</a> - Yahoo!路線情報</li>
-            	<li><a href="http://www.navitime.co.jp/train/" title="運行情報" class="general-anchor">運行情報</a> - NAVITIME</li>
-
-			</ul>
-
-		</div>
-<!--
-<div class="OUTBRAIN" data-src="DROP_PERMALINK_HERE" data-widget-id="AR_2" data-ob-template="Tetsudo.com"></div>
-<script type="text/javascript" async="async" src="//widgets.outbrain.com/outbrain.js"></script>
--->
-		
-        <div class="ads-medium-rectangle-c">
-            <!-- /83555300/asahi_interactive/tetsudo_com/pc_list_right_2nd -->
-            <div id="pc_list_right_2nd"></div>
-            <script>
-                googletag.cmd.push(function() { googletag.display('pc_list_right_2nd'); });
-            </script>
-
-            <!-- /83555300/asahi_interactive/tetsudo_com/sp_list_footer_2nd -->
-            <div id="sp_list_footer_2nd"></div>
-            <script>
-                googletag.cmd.push(function() { googletag.display('sp_list_footer_2nd'); });
-            </script>
-       </div>
-
-
-	<!--Feed Plug-in-->
-		<div class="feed-plugin">
-
-			<h3><img src="//images.tetsudo.com/interface-icon/feed-16x16.png" alt="フィード" title="運行情報サイト更新状況のフィード" class="interface-icon-16x16">運行情報サイト更新状況のフィード</h3>
-			<hr>
-			<ul class="first-layer">
-				<li>運行情報サイト更新状況（全国版）
-					<ul class="second-layer">
-						<li><img src="//images.tetsudo.com/interface-icon/feed-12x12.png" alt="フィード" title="Atom 1.0" class="interface-icon-12x12"><a href="http://api.tetsudo.com/traffic/atom.xml" title="運行情報サイト更新状況（全国版）（Atom 1.0形式）" class="general-anchor">Atom 1.0形式（推奨）</a></li>
-						<li><img src="//images.tetsudo.com/interface-icon/feed-12x12.png" alt="フィード" title="RSS 1.0" class="interface-icon-12x12"><a href="http://api.tetsudo.com/traffic/rss10.rdf" title="運行情報サイト更新状況（全国版）（RSS 1.0形式）" class="general-anchor">RSS 1.0形式</a></li>
-
-						<li><img src="//images.tetsudo.com/interface-icon/feed-12x12.png" alt="フィード" title="RSS 2.0" class="interface-icon-12x12"><a href="http://api.tetsudo.com/traffic/rss20.xml" title="運行情報サイト更新状況（全国版）（RSS 2.0形式）" class="general-anchor">RSS 2.0形式</a></li>
-					</ul>
-				</li>
-			</ul>
-            <p>このページで表示している運行情報サイトの更新状況はフィードからもご利用になれます。<!--全国版のほか、各エリアごとに絞り込みもできます。--></p>
-
-		</div>
-
-    <div class="ads-medium-rectangle-c">
-		<!-- /83555300/asahi_interactive/tetsudo_com/pc_list_right_3rd -->
-		<div id="pc_list_right_3rd"></div>
-		<script>
-			googletag.cmd.push(function() { googletag.display('pc_list_right_3rd'); });
-		</script>
-
-		<!-- /83555300/asahi_interactive/tetsudo_com/sp_list_footer_3rd -->
-		<div id="sp_list_footer_3rd"></div>
-		<script>
-			googletag.cmd.push(function() { googletag.display('sp_list_footer_3rd'); });
-		</script>
+    <!-- /mhlg -->
+    <!-- mhli_logout -->
+    <div class="msthdtxt">
+      <p>IDでもっと便利に<a data-redirectadclick href="https://account.edit.yahoo.co.jp/registration?.intl=jp&.done=https%3A%2F%2Ftransit.yahoo.co.jp%2Ftraininfo%2Fdetail%2F86%2F0%2F&.src=transit" class="b" data-ylk="slk:h_regyid;pos:0" id="msthdReg">新規取得</a></p>
+      <p><a data-redirectadclick href="https://login.yahoo.co.jp/config/login?.src=transit&lg=jp&.intl=jp&.done=https%3A%2F%2Ftransit.yahoo.co.jp%2Ftraininfo%2Fdetail%2F86%2F0%2F" class="b" data-ylk="slk:h_login;pos:0" id="msthdLogin">ログイン</a><span id="mhd_text_pc"></span></p>
     </div>
+    <!-- /mhli_logout -->
+  </div>
+</div>
+<script type="text/javascript" src="https://s.yimg.jp/images/security/pf/pcore-1.0.2.min.js"></script>
+<script type="text/javascript" src="https://s.yimg.jp/images/security/pf/yjsecure.js"></script>
+<script type="text/javascript" src="https://s.yimg.jp/images/mempf/mhd/2_3_0/mempf.js"></script>
+<script type="text/javascript">
+window.msthdPromo = function() {
+  YAHOO.JP.msthd.Promo.init();
+};
+</script>
+<script type="text/javascript">
+  (function(d,t){var s=d.getElementsByTagName(t)[0],n=d.createElement(t);n.id='msthdScript';n.src='https://s.yimg.jp/yui/jp/mh/pc/1.9.0/js/std-min.js';n.setAttribute('data-s','');n.setAttribute('data-tm','');s.parentNode.insertBefore(n,s);}(document,'script'));
+</script>
+<!-- /mhd -->
+<!-- EMG3 noResult --><!-- EMG2 noResult --><!-- EMG noResult -->
+</div>
+<!--/header end-->
 
-	</div>
+<hr class="separation">
 
+<!--contents start-->
+<div id="contents">
+
+<div id="contents-header">
+
+
+<div id="mdLocalNav">
+<div class="lNavWrp">
+<p>路線情報（乗換案内・時刻表・路線図）</p>
+<ul>
+<li><a href="https://roadway.yahoo.co.jp/">道路交通情報</a></li><!--
+--><li><a href="https://loco.yahoo.co.jp/">お店</a></li><!--
+--><li><a href="https://map.yahoo.co.jp/">地図</a></li><!--
+--><li><span class="current">路線情報</span></li>
+</ul>
+</div>
+</div>
+<!--/#mdLocalNav-->
+
+<div id="mdGlobalNav">
+<div class="gNavWrp">
+<ul>
+<li><a href="/">乗換案内</a></li><!--
+--><li class="current"><a href="/traininfo/top">運行情報</a></li><!--
+--><li><a href="/station/top">駅情報</a></li><!--
+--><li><a href="/station/time">時刻表</a></li><!--
+--><li><a href="/main/update">情報対応履歴</a></li><!--
+--><li class="railmap"><a href="https://map.yahoo.co.jp/maps?mode=railway">路線図(Yahoo!地図)</a></li>
+</ul>
+<p class="my"><a href="/my/top">マイページ - 各種設定・確認</a></p>
+</div>
+</div><!--/#mdGlobalNav-->
+
+<div id="cat-pass">
+<p><span class="yj-guid">現在位置：</span><a href="https://transit.yahoo.co.jp/">路線情報トップ</a>
+ &gt; <a href="/traininfo/top">運行情報</a> &gt; <a href="/traininfo/area/4/">運行情報 - 関東</a>
+ &gt; 西武新宿線</p>
+</div><!--/#cat-pass end-->
+</div><!--/#contents-header end-->
+
+<div id="contents-body">
+
+<span class="yj-guid"><a name="contents-start" id="contents-start"></a><img src="https://s.yimg.jp/images/clear.gif" alt="ここから本文です" width="1" height="1"></span>
+
+<!--main start-->
+<div id="main">
+<noscript>
+<div class="boxInfo">
+<dl>
+<dt class="title important">JavaScriptが無効です</dt>
+<dd>Yahoo!路線情報を正しくご利用いただくにはJavaScriptの設定を「有効」にする必要があります。</dd>
+<dd>JavaScriptを「有効」にするには<a href="https://support.yahoo-net.jp/noscript">こちら</a>をご覧ください。</dd>
+</dl>
+</div>
+</noscript>
+<div class="mainWrp">
+
+<div class="labelLarge">
+<span class="staKana">せいぶしんじゅくせん</span>
+<h1 class="title">西武新宿線</h1>
+<span class="subText">6月1日 07時01分更新</span>
+<div class="relLink"><p class="btnDefault"><a href="/diaedit/myline/86/0/"><span class="icnReg">[reg]</span>路線を登録</a></p></div>
 </div>
 
-<!--==========Common Footer==========-->
+<div id="mdServiceStatus">
+<dl>
+<dt><span class="icnNormalLarge">[○]</span>平常運転</dt>
+<dd class="normal">
+<p>現在､事故･遅延に関する情報はありません。</p>
+</dd>
+</dl>
+</div><!--/#mdServiceStatus-->
 
-		<div class="ads-super-banner-f">
-            <!-- /83555300/asahi_interactive/tetsudo_com/pc_list_footer -->
-            <div id="pc_list_footer"></div>
-            <script>
-                googletag.cmd.push(function() { googletag.display('pc_list_footer'); });
-            </script>
-
-            <!-- /83555300/asahi_interactive/tetsudo_com/sp_list_footer_4th -->
-            <div id="sp_list_footer_4th"></div>
-            <script>
-                googletag.cmd.push(function() { googletag.display('sp_list_footer_4th'); });
-            </script>
-		</div>
-
-<footer>
-    <script>
-    var trackSpecialOutboundLink = function(url) {
-       ga('send', 'event', 'outbound', 'click', url, {'hitCallback':
-         function () {
-         document.location = url;
-         }
-       });
-    }
-    </script>
-<!--
-    <div id="contest-20th-footer-banner">
-        <a href="https://acafe.msc.sony.jp/info/tetsudocom_railway_contest_2019/index.html?s_tc=jp_tcom_tetsudocom_railway_contest_2019"  onclick="trackSpecialOutboundLink('https://acafe.msc.sony.jp/info/tetsudocom_railway_contest_2019/index.html?s_tc=jp_tcom_tetsudocom_railway_contest_2019'); return false;"><img src="https://images.tetsudo.com/special/20th/contest/tetsudocom_railway_contest_2019_1200_148.jpg" alt="懐かしの鉄道写真コンテスト"></a>
-    </div>
--->
-
-    <div class="container" role="complementary">
-
-        <ul class="footer-nav">
-            <li>
-                <h4><a href="/event/">鉄道イベント情報</a></h4>
-                <ul>
-                    <li class=""><a href="/event/calendar/202105/">2021年5月のイベント情報</a></li>
-                    <li class=""><a href="/event/calendar/">日付別にイベント情報を見る</a></li>
-                    <li class=""><a href="/event/category/">カテゴリ別にイベントを見る</a></li>
-                    <li class=""><a href="/event/rank/">鉄道イベント情報ランキング</a></li>
-                    <li class=""><a href="/event/new/">新しいイベント情報</a></li>
-                    <li class=""><a href="/event/new/picture/">投稿されたイベント写真</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/news/">鉄道未来ニュース</a></h4>
-                <ul>
-                    <li class=""><a href="/news/future/">鉄道未来インデックス</a></li>
-                    <li class=""><a href="/news/new/">未来ニュースバックナンバー</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/report/">鉄道リポート</a></h4>
-                <ul>
-                    <li class=""><a href="/report/">リポート記事一覧</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/topics/">鉄道車両トピックス</a></h4>
-                <ul>
-                    <li class=""><a href="/topics/">車両トピックス一覧</a></li>
-                    <li class=""><a href="/topics/category/">カテゴリ別トピックスを見る</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/site/">鉄道公式リリース</a></h4>
-                <ul>
-                    <li class=""><a href="/site/">新着リリース一覧</a></li>
-                    <li class=""><a href="/site/calendar/">日付別にリリースを見る</a></li>
-                    <li class=""><a href="/site/category/">カテゴリ別にリリースを見る</a></li>
-                    <li class=""><a href="/site/special/dia202103.html">春ダイヤ改正リリース一覧</a></li>
-                    <li class=""><a href="/site/special/rin2021spring.html">春の臨時列車リリース一覧</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4 class="current">鉄道運行情報</h4>
-                <ul>
-                    <li class="current mini-list">運行情報サイト更新状況                    <ul class="mini-list">
-                        <li><a href="/traffic/category/%E6%96%B0%E5%B9%B9%E7%B7%9A/">新幹線</a></li>
-                        <li><a href="/traffic/category/%E5%8C%97%E6%B5%B7%E9%81%93%E3%82%A8%E3%83%AA%E3%82%A2/">北海道</a></li>
-                        <li><a href="/traffic/category/%E6%9D%B1%E5%8C%97%E3%82%A8%E3%83%AA%E3%82%A2/">東北</a></li>
-                        <li><a href="/traffic/category/%E9%96%A2%E6%9D%B1%E3%82%A8%E3%83%AA%E3%82%A2/">関東</a></li>
-                        <li><a href="/traffic/category/%E4%BF%A1%E8%B6%8A%E3%82%A8%E3%83%AA%E3%82%A2/">信越</a></li>
-                        <li><a href="/traffic/category/%E5%8C%97%E9%99%B8%E3%82%A8%E3%83%AA%E3%82%A2/">北陸</a></li>
-                        <li><a href="/traffic/category/%E6%9D%B1%E6%B5%B7%E3%82%A8%E3%83%AA%E3%82%A2/">東海</a></li>
-                        <li><a href="/traffic/category/%E8%BF%91%E7%95%BF%E3%82%A8%E3%83%AA%E3%82%A2/">近畿</a></li>
-                        <li><a href="/traffic/category/%E4%B8%AD%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/">中国</a></li>
-                        <li><a href="/traffic/category/%E5%9B%9B%E5%9B%BD%E3%82%A8%E3%83%AA%E3%82%A2/">四国</a></li>
-                        <li><a href="/traffic/category/%E4%B9%9D%E5%B7%9E%E3%82%A8%E3%83%AA%E3%82%A2/">九州</a></li>
-                    </ul>
-</li>
-                    <li class=""><a href="/traffic/map/">鉄道長期不通路線マップ</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/newspaper/">新聞･放送ニュース</a></h4>
-                <ul>
-                    <li class=""><a href="/newspaper/">新着記事一覧</a></li>
-                    <li class=""><a href="/newspaper/category/">カテゴリ別に記事一覧を見る</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/microblog/">鉄道つぶやき</a></h4>
-                <ul>
-                    <li class=""><a href="/microblog/">直近3日間の人気新着ツイート</a></li>
-                    <li class=""><a href="/microblog/calendar/20210506/">5月6日の鉄道つぶやき</a></li>
-                    <li class=""><a href="/microblog/category/">カテゴリ別につぶやきを見る</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/blog/">鉄道ブログ</a></h4>
-                <ul>
-                    <li class=""><a href="/blog/entryrank/">最近よく見られたブログ記事</a></li>
-                    <li class=""><a href="/blog/calendar/20210506/">5月6日の鉄道ブログ</a></li>
-                    <li class=""><a href="/blog/category/">カテゴリ別にブログを見る</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/blog/rank/">鉄道ブログランキング</a></h4>
-            </li>
-            <li>
-                <h4><a href="/movie/">鉄道動画</a></h4>
-                <ul>
-                    <li class=""><a href="/movie/">最近よく見られた動画</a></li>
-                    <li class=""><a href="/movie/calendar/20210506/">5月6日の鉄道動画</a></li>
-                    <li class=""><a href="/movie/category/">カテゴリ別に動画を見る</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/bbs/">鉄道掲示板</a></h4>
-                <ul>
-                    <li class=""><a href="/bbs/">よく書き込まれている掲示板</a></li>
-                    <li class=""><a href="/bbs/new/">最近書き込まれた掲示板</a></li>
-                    <li class=""><a href="/bbs/calendar/20210506/">5月6日に作成された掲示板</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/word/">ひとこと</a></h4>
-            </li>
-            <li>
-                <h4><a href="/chain/">駅つなゲー</a></h4>
-            </li>
-            <li>
-                <h4><a href="/">トップ</a></h4>
-                <ul>
-                    <li class=""><a href="/category/">カテゴリ</a></li>
-                    <li class=""><a href="/calendar/">カレンダー</a></li>
-                    <li class=""><a href="/search/">ワード検索</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/special/20th/">特別企画</a></h4>
-            </li>
-            <li>
-                <h4>公式アカウント</h4>
-                <ul>
-                    <li class=""><a href="https://www.facebook.com/tetsudocom/">Facebook</a></li>
-                    <li class=""><a href="https://twitter.com/tetsudo_com">Twitter（総合アカウント）</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4><a href="/help/">ヘルプ</a></h4>
-                <ul>
-                    <li class=""><a href="/help/inquiry.html">ご意見・お問い合わせ</a></li>
-                </ul>
-            </li>
-            <li>
-                <h4>運営会社・メディア</h4>
-                <ul>
-                    <li class=""><a href="https://aiasahi.jp/">朝日インタラクティブ</a></li>
-                    <li class=""><a href="https://japan.cnet.com/">CNET Japan</a></li>
-                    <li class=""><a href="https://japan.zdnet.com/">ZDNet Japan</a></li>
-                    <li class=""><a href="https://builder.japan.zdnet.com/">builder by ZDNet Japan</a></li>
-                    <li class=""><a href="https://japan.techrepublic.com/">TechRepublic Japan</a></li>
-                </ul>
-            </li>
-
-        </ul>
-
-    </div>
+<div class="boxFunctionInfo">
+<p>路線を登録すると、登録した路線の運行情報を路線トップに表示したり、メールで受け取ることができます。</p>
+</div>
 
 
-    <hr>
+<div class="pos-im">
+<div id="yads_35538_17008_01"></div>
+</div>
 
-    <div class="footer-information">
+<div id="mdRtSearch">
+<div class="labelMedium">
+<h2 class="title">西武新宿線に関するつぶやき</h2>
+<p class="btnTw"><a href="https://twitter.com/share" class="twitter-share-button" data-url="https://transit.yahoo.co.jp/traininfo/detail/86/0/" data-text="西武新宿線の運行情報" data-lang="ja" data-count="none" data-hashtags="西武新宿線 #話題なう">ツイート</a></p>
+</div>
 
-        <div class="compliance">
-            <ul class="compliance-information">
-                <li><a href="https://aiasahi.jp/privacy/" rel="nofollow" title="個人情報保護方針">個人情報保護方針</a></li>
-                <li><a href="https://aiasahi.jp/term/" rel="nofollow" title="朝日インタラクティブ サービス 利用規約">利用規約</a></li>
-                <li><a href="https://aiasahi.jp/advertisement/" rel="nofollow" title="広告掲載">広告掲載</a></li>
-            </ul>
-        </div>
+<div id="rtstweet" class="itemCts">
+<ul>
+<li>
+<p class="tweet">都営新宿線【その他】感染症拡大防止等の影響で、本日も最終の時間が変更となっています。(06/01 05:00)</p>
 
-        <div class="copyright" role="contentinfo">
-            <a href="https://aiasahi.jp/copyright/" rel="nofollow" title="コピーライト">Copyright</a> &copy; 2021 ASAHI INTERACTIVE, Inc. All Rights Reserved. No reproduction or republication without written permission.
-        </div>
-
-    </div>
-
-	<div id="footer-gdpr-box">
-		<div class="gdpr-inner-text">
-			<p>このサイトでは、利用状況の把握や広告配信などのために、Cookieなどを使用してアクセスデータを取得・利用しています。これ以降ページを遷移した場合、Cookieなどの設定や使用に同意したことになります。Cookieなどの設定や使用の詳細、オプトアウトについては<a href="https://aiasahi.jp/cookie/">詳細</a>をご覧ください。</p>
-		</div>
-		<div class="close-button">
-			<a href="#" id="gdpr-button-agreed"><i class="fas fa-window-close"></i></a>
-		</div>
-	</div>
-
-</footer>
-
-
-
-
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
 <script>
-	var _getCookie = function (key) {
-		var counter, _key, _val, cookies = document.cookie.split(';');
-		for (counter = 0; counter < cookies.length; counter++) {
-		  if (_key = cookies[counter].substr(0, cookies[counter].indexOf('=')),
-			  _val = cookies[counter].substr(cookies[counter].indexOf('=') + 1),
-			  _key = _key.replace(/^\s+|\s+$/g, ''),
-			  _key === key) return unescape(_val);
-	  }
-	}
-	
-	ga(function(tracker) {
-		ga('set', 'dimension1', tracker.get('clientId'));
-	});
-	ga('set', 'dimension2', _getCookie('B'));
-	ga('set', 'dimension3', _getCookie('SPB'));
-	ga('set', 'dimension4', _getCookie('_td'));
-	ga('send', 'pageview');
-
-</script>
-
-<script type="application/ld+json">
-{
-    "@context" : "http://schema.org",
-    "@graph" :
-    [
-        {
-            "@type": "Organization",
-            "logo": "https://images.tetsudo.com/common/logo-470x246.png",
-            "url": "https://www.tetsudo.com/",
-            "name": "鉄道コム", 
-            "sameAs": "https://www.facebook.com/tetsudocom"  
-        },
-        {
-            "@type": "WebSite",
-            "url": "https://www.tetsudo.com/",
-            "name": "Tetsudo.com（鉄道コム）", 
-            "alternateName": "鉄道コム",
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://www.tetsudo.com/search/query/?keyword={search_term}",
-                "query-input": "required name=search_term"
-            }
-        }
-    ]
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:1;slk:rtstwurl;rtstwid:1399459171116863488");
 }
 </script>
+<div class="metadata">
+<a href="https://twitter.com/unko_kanto" data-ylk="rsec:rtstweet;pos:1;slk:rtstwscre;rtstwid:1399459171116863488">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8B2FauAYMF4jOP5zFJAV4i5e72TLbER0xQeK1l8ZZ0OLXh495II5BFZ3VJpn8pRnYZfXSTJVJvWraVKP62q-kj_u9O8FcG6AnJtxWuBQifus3SDfNPclIuxsPNuhR5dZeQ==" />
+<div class="account">
+<span class="user">unko_kanto</span>
+<span class="full">（unko_kanto）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/unko_kanto/status/1399459171116863488" data-ylk="rsec:rtstweet;pos:1;slk:rtstwtime;rtstwid:1399459171116863488">2時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">[新宿線本八幡駅発車後] [急行橋本行車内放送] 都営新宿線をご利用くださいまして ありがとうございます。 この電車は急行橋本行です。 新宿までの止まる駅は船堀、大島 森下、馬喰横山、神保町、市ヶ谷 新宿です。その他の駅は通過します のでご注意ください。 次は船堀、船堀です。</p>
 
-
-<script>(function(d,u){var b=d.getElementsByTagName("script")[0],j=d.createElement("script");j.async=true;j.src=u;b.parentNode.insertBefore(j,b);})(document,"//img.ak.impact-ad.jp/ut/c906999ddcc53ef2_2510.js");</script><noscript><iframe src="//nspt.unitag.jp/c906999ddcc53ef2_2510.php" width="0" height="0"></iframe></noscript>
-
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
 <script>
-!function(t,e){if(void 0===e[t]){e[t]=function(){e[t].clients.push(this),this._init=[Array.prototype.slice.call(arguments)]},e[t].clients=[];for(var r=function(t){return function(){return this["_"+t]=this["_"+t]||[],this["_"+t].push(Array.prototype.slice.call(arguments)),this}},s=["blockEvents","fetchServerCookie","unblockEvents","setSignedMode","setAnonymousMode","resetUUID","addRecord","fetchGlobalID","set","trackEvent","trackPageview","trackClicks","ready"],n=0;n<s.length;n++){var o=s[n];e[t].prototype[o]=r(o)}var c=document.createElement("script");c.type="text/javascript",c.async=!0,c.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.treasuredata.com/sdk/2.3/td.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(c,a)}}("Treasure",this);
-var td = new Treasure({
-  host: 'in.treasuredata.com',
-  writeKey: '8189/a9e385bc8228de801d854ac1ddfef6b59eb3517f',
-  database: 'datas',
-  startInSignedMode: true,
-  useServerSideCookie: false
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:2;slk:rtstwurl;rtstwid:1399426419713708037");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/jidouhousoubot" data-ylk="rsec:rtstweet;pos:2;slk:rtstwscre;rtstwid:1399426419713708037">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8B2FauAYMF4jOP5zFJAV4i5e72TLbER0xQeK1l8ZZ0OLHU26Fmg0XROwiSbSKIj_cIRlsffEJirHN5HBPYievBxEpNwYSSFoBB8F0ID-sNi_tr5pWPhW9d60LEcIv7htkw==" />
+<div class="account">
+<span class="user">jidouhousoubot</span>
+<span class="full">（鉄道自動放送bot）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/jidouhousoubot/status/1399426419713708037" data-ylk="rsec:rtstweet;pos:2;slk:rtstwtime;rtstwid:1399426419713708037">4時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">鉄道人身事故 路線名別 &lt; 5/31現在&gt;  1 京急本線 14  2 西武新宿線 / 東武東上線 11 4 JR神戸線/中央快速線/東武野田線/山陽本線(JR西)(姫路～下関) 10 8 京成本線 9 9 京阪本線/常磐線 8 *==(TOP-10)==* 11 鹿児島本線/日豊本線 7  ※常磐線(鈍行) +2 別途あり ●京急独走開始 (下位と 3件差)</p>
+
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:3;slk:rtstwurl;rtstwid:1399420855306752007");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/Hasshi_Rupin" data-ylk="rsec:rtstweet;pos:3;slk:rtstwscre;rtstwid:1399420855306752007">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8B2FauAYMF4jOP5zFJAV4i5e72TLbER0xQeK1l8ZZ0OLBzX9MQ5QCJXNvPYmaXVqbYKRi4DKAZ440y6QMEWAAVWPnWl0zL6USflMI3wn1VNZa9Kh_xpAKQUGrzxC206Z1A==" />
+<div class="account">
+<span class="user">Hasshi_Rupin</span>
+<span class="full">（はっしーの小部屋　小粒のデラウェア）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/Hasshi_Rupin/status/1399420855306752007" data-ylk="rsec:rtstweet;pos:3;slk:rtstwtime;rtstwid:1399420855306752007">5時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">高1の頃 停電するレベルの落雷あったのに 西武池袋線は普通に走ってた。 西武線が遅延するのは人身事故と混雑による影響のみ。</p>
+
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:4;slk:rtstwurl;rtstwid:1399369157557186564");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/vlovolm" data-ylk="rsec:rtstweet;pos:4;slk:rtstwscre;rtstwid:1399369157557186564">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8B2FauAYMF4jOP5zFJAV4i5e72TLbER0xQeK1l8ZZ0OLOL054gYVLnuzSDgSD47y-dXMbY5MJ2dhOFZdx1l2yEsDvxujPfs6vJMmT41TNEIMcpJRaP0_QM3354ZxdP3LOQ==" />
+<div class="account">
+<span class="user">vlovolm</span>
+<span class="full">（浪佐(ガ勉中‼️)）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/vlovolm/status/1399369157557186564" data-ylk="rsec:rtstweet;pos:4;slk:rtstwtime;rtstwid:1399369157557186564">8時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">新宿線は、01時40分頃、岩本町駅にて発生した保守用車故障のため、終日急行運転を中止します。現在、列車の遅れ、運休は、発生しておりません。  【2019年07月11日 06時17分 保守車両が岩本町駅4番線で立ち往生した時のもの】</p>
+
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:5;slk:rtstwurl;rtstwid:1399341385111642119");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/toeimeigen" data-ylk="rsec:rtstweet;pos:5;slk:rtstwscre;rtstwid:1399341385111642119">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8P6b-YUbn3oNOitp_cHdw_uJ74V6_SfYweFQS1qwk-_TJcz301WI2Cz5eywMtn22AoNcm-px-tUtzgy1UghJnmv5CSX3nK1QdnMN8PmdZ_qSRfmW3BParKbS5HEF20pyfA==" />
+<div class="account">
+<span class="user">toeimeigen</span>
+<span class="full">（【現在の運行情報ではありません】都営交通迷言bot）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/toeimeigen/status/1399341385111642119" data-ylk="rsec:rtstweet;pos:5;slk:rtstwtime;rtstwid:1399341385111642119">10時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">あと西武線はドラエモンラッピング電車も走ってるよー ちょっとだけ田舎で都心に近い住みやすい街だよー。 急行止まるし！！！家賃もやすい！</p>
+
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:6;slk:rtstwurl;rtstwid:1399338682918653956");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/erohon_12" data-ylk="rsec:rtstweet;pos:6;slk:rtstwscre;rtstwid:1399338682918653956">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8B2FauAYMF4jOP5zFJAV4i5e72TLbER0xQeK1l8ZZ0OLjyrMVLM1cVNDYunyoepVY_x3C3w-0m-FMfbBJTu5mnzfy1VEYmuCYgaLDAjOFTqz49U8nJbh3RdwBA_w_J89OQ==" />
+<div class="account">
+<span class="user">erohon_12</span>
+<span class="full">（FUZZ@ﾃｨｱﾏﾄ鯖と音楽）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/erohon_12/status/1399338682918653956" data-ylk="rsec:rtstweet;pos:6;slk:rtstwtime;rtstwid:1399338682918653956">10時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">天気のせいで小江戸詐欺また発生しました。お疲れ様です。明日こそいきますよ、小江戸</p>
+
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:7;slk:rtstwurl;rtstwid:1399323745211142153");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/iam31suke" data-ylk="rsec:rtstweet;pos:7;slk:rtstwscre;rtstwid:1399323745211142153">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8B2FauAYMF4jOP5zFJAV4i5e72TLbER0xQeK1l8ZZ0OLC7aBcN67k6dr87tD6jXda3pykX8hJqw5qniA0Yqz9kFpvwmMG7QgxhwHV_clM-w4OqAatWFh_-Bl-mvojUvUNw==" />
+<div class="account">
+<span class="user">iam31suke</span>
+<span class="full">（ｻ ｲ）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/iam31suke/status/1399323745211142153" data-ylk="rsec:rtstweet;pos:7;slk:rtstwtime;rtstwid:1399323745211142153">11時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">西武新宿線だけインフラが50年前のレベルで止まっている</p>
+
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:8;slk:rtstwurl;rtstwid:1399290005458100224");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/MaosE8Yk8UlehBg" data-ylk="rsec:rtstweet;pos:8;slk:rtstwscre;rtstwid:1399290005458100224">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8B2FauAYMF4jOP5zFJAV4i5e72TLbER0xQeK1l8ZZ0OLO8XMUbmuo0iNUxplcWfF_hyBfwmAmvZS5u_ld0FPY8KRxjSFi-p9otQ6byMVvHDyrZWd3C_CU-K0W7bboM6q6A==" />
+<div class="account">
+<span class="user">MaosE8Yk8UlehBg</span>
+<span class="full">（雑木）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/MaosE8Yk8UlehBg/status/1399290005458100224" data-ylk="rsec:rtstweet;pos:8;slk:rtstwtime;rtstwid:1399290005458100224">14時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">新宿線は、7時41分頃に瑞枝駅で発生した人身事故のため、全線で運転を見合わせています。  【2017年04月23日 07時53分】</p>
+
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:9;slk:rtstwurl;rtstwid:1399288540614184966");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/toeimeigen" data-ylk="rsec:rtstweet;pos:9;slk:rtstwscre;rtstwid:1399288540614184966">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8P6b-YUbn3oNOitp_cHdw_uJ74V6_SfYweFQS1qwk-_TJcz301WI2Cz5eywMtn22AoNcm-px-tUtzgy1UghJnmv5CSX3nK1QdnMN8PmdZ_qSRfmW3BParKbS5HEF20pyfA==" />
+<div class="account">
+<span class="user">toeimeigen</span>
+<span class="full">（【現在の運行情報ではありません】都営交通迷言bot）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/toeimeigen/status/1399288540614184966" data-ylk="rsec:rtstweet;pos:9;slk:rtstwtime;rtstwid:1399288540614184966">14時間前</a>
+</div>
+</li>
+<li>
+<p class="tweet">西武線と東上線の接続は本来考えられてないから遅れたらおいてかれるだけなんだよこれよお💢</p>
+
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var result = $("#rtstweet").find("p:last>a").attr("href");
+if(result) {
+    $("#rtstweet").find("p:last>a").attr("data-ylk", "rsec:rtstweet;pos:10;slk:rtstwurl;rtstwid:1399255437011165187");
+}
+</script>
+<div class="metadata">
+<a href="https://twitter.com/kamiita_exp" data-ylk="rsec:rtstweet;pos:10;slk:rtstwscre;rtstwid:1399255437011165187">
+<img height="48" width="48" class="pict" src="https://rts-pctr.c.yimg.jp/BgIFgYJGVIVv8u0nVJvw8B2FauAYMF4jOP5zFJAV4i5e72TLbER0xQeK1l8ZZ0OLYQ6FXT-mslhfKQ5c9DuQmuLXN5o1yC926QmcD3RzD7mmzmF0z1nJIECcsGyEHff5njAhaWTwrV2yvrt6S7Dqyg==" />
+<div class="account">
+<span class="user">kamiita_exp</span>
+<span class="full">（かみいた☭）</span>
+</div>
+</a>
+<a class="time" href="https://twitter.com/kamiita_exp/status/1399255437011165187" data-ylk="rsec:rtstweet;pos:10;slk:rtstwtime;rtstwid:1399255437011165187">16時間前</a>
+</div>
+</li>
+</ul>
+</div>
+<div id="rltm" class="itemFt">
+<div class="btn"><a href="https://search.yahoo.co.jp/realtime/search?rid=04-0084-0086&rkf=1&fr=rts_transit_brw_delay" data-ylk="slk:more-wb;pos:0">この路線に関するつぶやき</a>
+</div>
+<ul class="note">
+<li>※つぶやき内のリンク先には外部サイトも含まれます。</li>
+<li>※ヤフー株式会社は、つぶやきによる情報によって生じたいかなる損害に対しても一切の責任を負いません。あらかじめご了承ください。</li>
+</ul>
+</div>
+</div><!--/#mdRtSearch-->
+
+<p class="navBack"><a href="/traininfo/area?area=4">関東の運行情報へ戻る</a></p>
+
+</div><!--/.mainWrp-->
+
+<div id="pos-sqb"></div>
+</div><!--/#main end-->
+<!--/main end-->
+
+<!--sub start-->
+<div id="sub">
+<hr class="separation">
+
+<div id="pos-lrec"></div>
+<!--other-service start-->
+<div id="mdOtherService">
+<ul id="srvclnk">
+<li>
+<a href="http://promo.map.yahoo.co.jp/map/"><img src="https://s.yimg.jp/images/map/promo/map_pr/icon/maps48.png" width="16" height="16" alt="Yahoo! MAP"></a>
+<a href="http://promo.map.yahoo.co.jp/map/">目的地まで迷わず行ける　Yahoo! MAP</a>
+</li>
+<li>
+<a href="http://weather.yahoo.co.jp/weather/promo/app/"><img src="https://s.yimg.jp/c/icon/s/bsc/2.0/weather20.gif" width="16" height="16" alt="Yahoo!天気・災害"></a>
+<a href="http://weather.yahoo.co.jp/weather/promo/app/">天気アプリの決定版　Yahoo!天気・災害</a>
+</li>
+<li>
+<a href="http://travel.yahoo.co.jp/domestic_air/"><img src="https://s.yimg.jp/c/icon/s/bsc/2.0/travel20.gif" width="16" height="16" alt="Yahoo!トラベル"></a>
+<a href="http://travel.yahoo.co.jp/domestic_air/">国内航空券予約　Yahoo!トラベル</a>
+</li>
+<li>
+<a href="http://roadway.yahoo.co.jp/"><img src="https://s.yimg.jp/c/icon/s/bsc/2.0/roadway20.gif" width="16" height="16" alt="Yahoo!道路交通情報"></a>
+<a href="http://roadway.yahoo.co.jp/">渋滞をチェック　Yahoo!道路交通情報</a>
+</li>
+</ul>
+</div><!--/#mdOtherService-->
+
+<div class="pos-im">
+<div id="yads_35538_17008_02"></div>
+<script type="text/javascript" language="JavaScript">
+<!--
+yads_ad_ds = '35538_17008';
+yads_type_tag = 'unkoujouhou_13';
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" src="//yads.c.yimg.jp/js/yads.js"></script>
+</div>
+</div><!--/#sub-->
+<!--/sub-->
+
+</div>
+<!--/#contents-body-->
+
+<div id="contents-footer">
+<div id="mdFatFooter">
+<h2 class="title"><span>アプリでもYahoo!乗換案内</span></h2>
+<p class="pageTop"><a href="#wrapper" data-ylk="slk:apins_uppg;pos:0"><span class="icnArwUp">[↑]</span>ページトップへ</a></p>
+<ul>
+<li class="pict"><span class="pictDevice">[device]</span></li><!--
+--><li>
+<dl>
+<dt><span class="ttlIphone">iPhone版</span></dt>
+<dd><a class="bnrStoreApple" href="https://itunes.apple.com/app/apple-store/id291676451?pt=13834&ct=yjtransit_pc_footer&mt=8" data-ylk="slk:apins_ios;pos:0">Yahoo!乗換案内　無料の時刻表、運行情報、乗り換え検索をダウンロードする</a></dd>
+<dd><span class="qrStoreApple">[qrcode]</span></dd>
+<dd class="note">
+<p>推奨環境 iOS 11.0以上</p>
+<p>※Yahoo!乗換案内バージョン8.1より、iOS 10以下は動作保証の対象外となりますのでご注意ください。</p>
+</dd>
+</dl>
+</li><!--
+--><li>
+<dl>
+<dt><span class="ttlAndroid">Android版</span></dt>
+<dd><a class="bnrStoreGoogle" href="https://yahoo.jp/N5UItD" data-ylk="slk:apins_and;pos:0">Yahoo!乗換案内　無料の時刻表、運行情報、乗り換え検索をダウンロードする</a></dd>
+<dd><span class="qrStoreGoogle">[qrcode]</span></dd>
+<dd class="note">
+<p>推奨環境 Android 4.4以上</p>
+<p>※ただし一部の機種では正常に動作しない場合があります。</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="elmFooterNav">
+<ul>
+<li><a href="/">乗換案内</a></li><!--
+--><li><a href="/traininfo/top" data-ylk="slk:ft_trinfo;pos:0">運行情報</a></li><!--
+--><li><a href="/station/top" data-ylk="slk:ft_sttop;pos:0">駅情報</a></li><!--
+--><li><a href="/station/time" data-ylk="slk:ft_sttime;pos:0">時刻表</a></li><!--
+--><li><a href="/main/update" data-ylk="slk:ft_update;pos:0">情報対応履歴</a></li>
+</ul>
+</div><!--/.elmFooterNav-->
+</div><!--/#mdFatFooter-->
+
+<span class="yj-guid"><img src="https://s.yimg.jp/images/clear.gif" width="1" height="1" alt="本文はここまでです"></span>
+<span class="yj-skip">
+<a href="#pagetop"><img src="https://s.yimg.jp/images/clear.gif" alt="このページの先頭へ" width="1" height="1"></a></span>
+</div><!--/#contents-footer end-->
+</div><!--/#contents end-->
+<!--/contents end-->
+
+<hr class="separation">
+
+<!--footer start-->
+<div id="footer">
+
+<address id="sf">
+<a href="https://privacy.yahoo.co.jp/">プライバシー</a> - <a href="https://about.yahoo.co.jp/common/terms/">利用規約</a> - <a href="https://support.yahoo-net.jp/PccTransit/s/article/H000007498">免責事項</a> - <a href="https://feedback.ms.yahoo.co.jp/voc/transit-voc/input">ご意見・ご要望</a> - <a href="https://support.yahoo-net.jp/PccTransit/s/">ヘルプ・お問い合わせ</a> - <a href="https://support.yahoo-net.jp/PccSearch/s/article/H000011637">Twitterデータについて</a>
+<br>
+
+
+Copyright (C) 2021 レスキューナウ All rights reserved.<br>
+Copyright (C) 2021 Yahoo Japan Corporation. All Rights Reserved.
+</address>
+
+</div><!--/footer end-->
+
+</div><!--/#wrapper end-->
+<script src="https://yads.c.yimg.jp/js/yads-async.js"></script>
+<script>
+    function noadCallback() {
+      $('.posASP').css('padding-bottom','0px');
+      yadsRequestAsync({
+          'yads_ad_ds': '51332_533431',
+          'yads_parent_element': 'pos-im',
+          'yads_ad_space': '2079416302',
+      });
+}
+</script>
+<script>
+    if (yadsRequestAsync) {
+    // テンプレート生成
+            yadsRequestAsync({
+            yads_ad_ds          : '74737_15842',
+            yads_parent_element : 'pos-sqb',
+            yads_ad_space       : '2079416302',
+                                });
+            yadsRequestAsync({
+            yads_ad_ds          : '82003_1312',
+            yads_parent_element : 'pos-lrec',
+            yads_ad_space       : '2079416302',
+                                });
+        }
+</script>
+</body>
+<script type="text/javascript" src="https://s.yimg.jp/l/ext/jquery/1.11.2/jquery.min.js"></script>
+<script>
+YAHOO = window.YAHOO || {};
+YAHOO.JP = YAHOO.JP || {};
+YAHOO.JP.srch = YAHOO.JP.srch || {};
+YAHOO.JP.srch.popSearchSetting = {
+    service_code: 'tst',
+    space_id: '2079416302',
+    target: $(".title, .trouble").toArray()
+};
+</script>
+<script src="https://s.yimg.jp/images/search/slink/popup/popsearch.min.js" charset="utf-8" async></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script type="text/javascript" src="https://s.yimg.jp/images/ds/ult/rapidjp-1.0.2.js"></script>
+<script type="text/javascript">
+$(function(){
+    var conf = {
+        spaceid:"2079416302",
+        tracked_mods:["emg3","emg2","emg","msthd","mdLocalNav","mdGlobalNav","mdFatFooter","sf","rltm"],
+        keys:{service:"transit",metakwd:"鉄道,航空路線,乗り換え案内,路線,運行情報,運行状況,運休,事故,遅延,遅延情報,西武新宿線",status:"logout",apptype:"web",opttype:"pc",pagetype:"detail",conttype:"trnstinfo",theme:"default"}, 
+        apv:false,
+        compr_on:false
+    };
+    var sr = (new YAHOO.i13n.JP.simpleRapid(conf));
+    var ins = sr.setViewableModule(["rtstweet"]).startViewable().setViewableTime(1000).initRapid();
 });
-td.set('$global', 'td_global_id', 'td_global_id');
-td.trackClicks();
-td.trackPageview('access');
 </script>
 
-
-</body>
 </html>
+
+
+<!-- fe141.transit.kks.ynwp.yahoo.co.jp Tue Jun  1 07:02:08 JST 2021 -->
